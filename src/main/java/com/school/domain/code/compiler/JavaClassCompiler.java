@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import static java.io.File.separator;
 import static javax.tools.ToolProvider.getSystemJavaCompiler;
 
 public class JavaClassCompiler {
@@ -37,7 +38,7 @@ public class JavaClassCompiler {
     }
 
     private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
-        File[] javaClassFile = {Paths.get(this.path, javaClass.getNameWithExtension()).toFile()};
+        File[] javaClassFile = {Paths.get(this.path, javaClass.getFullPath(separator)).toFile()};
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
     }

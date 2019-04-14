@@ -6,16 +6,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class JavaClassFactory {
-    private final String path;
+import static java.io.File.separator;
 
-    public JavaClassFactory(String path) {
-        this.path = path;
+public class JavaClassFactory {
+    private final String rootDir;
+
+    public JavaClassFactory(String rootDir) {
+        this.rootDir = rootDir;
     }
 
     public void create(JavaClass javaClass) throws Exception {
-        Path classPath = Paths.get(this.path,  javaClass.getNameWithExtension());
-        Files.write(classPath, javaClass.getContent().getBytes());
-    }
+        Files.createDirectories(Paths.get(rootDir, javaClass.getClassPackage()));
 
+        Path fullPathToClass = Paths.get(rootDir, javaClass.getFullPath(separator));
+        Files.write(fullPathToClass, javaClass.getContent().getBytes());
+    }
 }

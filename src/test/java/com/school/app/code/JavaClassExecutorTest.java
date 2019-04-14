@@ -16,6 +16,7 @@ import static java.nio.file.Files.readAllBytes;
 
 public class JavaClassExecutorTest {
     private static final String CLASS_NAME = "Test";
+    private static final String CLASS_PACKAGE = "tmp";
     private static final String TEMPLATE_FULL_NAME = "Template.java";
     private static final String TEXT_FILE_FULL_NAME = "test.txt";
 
@@ -23,8 +24,10 @@ public class JavaClassExecutorTest {
     private static final String TEMPLATE_DIR = ROOT_DIR + separator + "template";
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
 
-    private static final Path EXPECTED_JAVA_CLASS_PATH = Paths.get(ROOT_DIR + separator + CLASS_NAME + ".class");
-    private static final Path EXPECTED_CLASS_PATH = Paths.get(ROOT_DIR + separator + CLASS_NAME + ".java");
+    private static final Path EXPECTED_JAVA_CLASS_PATH =
+            Paths.get(ROOT_DIR + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".class");
+    private static final Path EXPECTED_CLASS_PATH =
+            Paths.get(ROOT_DIR + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".java");
     private static final Path EXPECTED_TEXT_FILE_PATH = Paths.get(TMP_DIR + TEXT_FILE_FULL_NAME);
 
     @After
@@ -53,12 +56,12 @@ public class JavaClassExecutorTest {
     }
 
     private JavaClass aNonCompilingClass() {
-        return new JavaClass(CLASS_NAME, "Something that will not compile");
+        return new JavaClass(CLASS_NAME, "Something that will not compile", CLASS_PACKAGE);
     }
 
     private JavaClass aTemplateJavaClass() throws IOException {
         Path pathToTemplate = Paths.get(TEMPLATE_DIR + separator + TEMPLATE_FULL_NAME);
 
-        return new JavaClass(CLASS_NAME, new String(readAllBytes(pathToTemplate)));
+        return new JavaClass(CLASS_NAME, new String(readAllBytes(pathToTemplate)), CLASS_PACKAGE);
     }
 }

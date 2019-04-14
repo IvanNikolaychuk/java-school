@@ -9,6 +9,8 @@ import java.net.URLClassLoader;
 import java.nio.file.Paths;
 
 public class JavaMainMethodRunner {
+    private static final String SEPARATOR = ".";
+
     private final String path;
 
     public JavaMainMethodRunner(String path) {
@@ -16,17 +18,19 @@ public class JavaMainMethodRunner {
     }
 
     public void run(JavaClass javaClass) throws Exception {
-        aClassLoader().loadClass(javaClass.getName())
+        aClassLoader().loadClass(getRelativePath(javaClass))
                 .getMethod("main", String[].class)
                 .invoke(null, emptyArgs());
     }
-
 
     private URLClassLoader aClassLoader() throws MalformedURLException {
         ClassLoader classLoader = JavaClassFactory.class.getClassLoader();
         return new URLClassLoader(new URL[]{Paths.get(this.path).toUri().toURL()}, classLoader);
     }
 
+    private String getRelativePath(JavaClass javaClass) {
+        return javaClass.getClassPackage() + SEPARATOR + javaClass.getName();
+    }
 
     private Object[] emptyArgs() {
         final Object[] args = new Object[1];
