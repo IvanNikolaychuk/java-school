@@ -13,10 +13,10 @@ import static java.io.File.separator;
 import static javax.tools.ToolProvider.getSystemJavaCompiler;
 
 public class JavaClassCompiler {
-    private final String path;
+    private final String rootDir;
 
-    public JavaClassCompiler(String path) {
-        this.path = path;
+    public JavaClassCompiler(String rootDir) {
+        this.rootDir = rootDir;
     }
 
     public CompilationResult compile(JavaClass javaClass) throws IOException {
@@ -38,7 +38,7 @@ public class JavaClassCompiler {
     }
 
     private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
-        File[] javaClassFile = {Paths.get(this.path, javaClass.getFullPath(separator)).toFile()};
+        File[] javaClassFile = {Paths.get(this.rootDir, javaClass.getFullPath(separator)).toFile()};
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
     }

@@ -8,10 +8,10 @@ import java.nio.file.Paths;
 
 import static java.io.File.separator;
 
-public class JavaClassFactory {
+public class JavaClassFileCreator {
     private final String rootDir;
 
-    public JavaClassFactory(String rootDir) {
+    public JavaClassFileCreator(String rootDir) {
         this.rootDir = rootDir;
     }
 

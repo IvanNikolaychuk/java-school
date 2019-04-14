@@ -4,7 +4,9 @@ $(document).ready(function() {
         $.ajax({
             url:'/runCode',
             type:'post',
-            data: {code: $code}
+            data: {
+                code: $code
+            }
         }).done(function(data) {
             alert(data);
         }).fail(function() {
