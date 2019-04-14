@@ -26,7 +26,7 @@ public class JavaClassFactoryTest {
 
         JavaClass result = factory.from(classContent);
 
-        assertEquals(result.getClassPackage(), CLASS_PACKAGE);
+        assertEquals(result.getPackages("."), CLASS_PACKAGE);
         assertEquals(result.getName(), CLASS_NAME);
     }
 

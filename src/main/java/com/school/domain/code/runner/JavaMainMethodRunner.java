@@ -1,7 +1,6 @@
 package com.school.domain.code.runner;
 
 import com.school.domain.code.JavaClass;
-import com.school.domain.code.creator.JavaClassFileCreator;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +17,7 @@ public class JavaMainMethodRunner {
     }
 
     public void run(JavaClass javaClass) throws Exception {
-        aClassLoader().loadClass(getRelativePath(javaClass))
+        aClassLoader().loadClass(javaClass.getFullPath(SEPARATOR))
                 .getMethod("main", String[].class)
                 .invoke(null, emptyArgs());
     }
@@ -26,10 +25,6 @@ public class JavaMainMethodRunner {
     private URLClassLoader aClassLoader() throws MalformedURLException {
         ClassLoader classLoader = JavaMainMethodRunner.class.getClassLoader();
         return new URLClassLoader(new URL[]{Paths.get(this.rootDir).toUri().toURL()}, classLoader);
-    }
-
-    private String getRelativePath(JavaClass javaClass) {
-        return javaClass.getClassPackage() + SEPARATOR + javaClass.getName();
     }
 
     private Object[] emptyArgs() {

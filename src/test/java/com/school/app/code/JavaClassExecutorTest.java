@@ -2,6 +2,7 @@ package com.school.app.code;
 
 import com.school.app.JavaClassExecutor;
 import com.school.domain.code.JavaClass;
+import com.school.domain.code.Package;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,13 +11,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static java.io.File.separator;
 import static java.nio.file.Files.readAllBytes;
 
 public class JavaClassExecutorTest {
     private static final String CLASS_NAME = "Test";
-    private static final String CLASS_PACKAGE = "tmp";
+
+    private static final String FIRST_PACKAGE_PART = "com";
+    private static final String SECOND_PACKAGE_PART = "school";
+    private static final String CLASS_PACKAGE = FIRST_PACKAGE_PART + separator + SECOND_PACKAGE_PART;
+
     private static final String TEMPLATE_FULL_NAME = "Template.java";
     private static final String TEXT_FILE_FULL_NAME = "test.txt";
 
@@ -56,12 +62,14 @@ public class JavaClassExecutorTest {
     }
 
     private JavaClass aNonCompilingClass() {
-        return new JavaClass(CLASS_NAME, "Something that will not compile", CLASS_PACKAGE);
+        return new JavaClass(new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART), CLASS_NAME,
+                "Something that will not compile");
     }
 
     private JavaClass aTemplateJavaClass() throws IOException {
         Path pathToTemplate = Paths.get(TEMPLATE_DIR + separator + TEMPLATE_FULL_NAME);
 
-        return new JavaClass(CLASS_NAME, new String(readAllBytes(pathToTemplate)), CLASS_PACKAGE);
+        return new JavaClass(new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART), CLASS_NAME,
+                new String(readAllBytes(pathToTemplate)));
     }
 }

@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static java.io.File.separator;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 public class CodeSectionController {
-    private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + separator + "academy";
+    private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + "academy";
 
     private final JavaClassExecutor javaClassExecutor;
     private final JavaClassFactory javaClassFactory;

@@ -2,29 +2,33 @@ package com.school.domain.code;
 
 public class JavaClass {
     private String content;
-    private String classPackage;
+    private Package classPackage;
     private String name;
 
-    public JavaClass(String name, String content, String classPackage) {
+    public JavaClass(Package classPackage, String name, String content) {
+        this.classPackage = classPackage;
         this.name = name;
         this.content = content;
-        this.classPackage = classPackage;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getClassPackage() {
-        return classPackage;
+    public String getPackages(String separator) {
+        return classPackage.fullPath(separator);
     }
 
-    public String getFullPath(String delimiter) {
-        return getClassPackage() + delimiter + getName() + getExtension();
+    public String getFullPath(String separator) {
+        return getPackages(separator) + separator + getName();
+    }
+
+    public String getFullPathWithExtension(String separator) {
+        return getFullPath(separator) + getExtension();
     }
 
     private String getExtension() {

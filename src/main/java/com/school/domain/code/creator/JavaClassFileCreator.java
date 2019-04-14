@@ -16,9 +16,9 @@ public class JavaClassFileCreator {
     }
 
     public void create(JavaClass javaClass) throws Exception {
-        Files.createDirectories(Paths.get(rootDir, javaClass.getClassPackage()));
+        Files.createDirectories(Paths.get(rootDir, javaClass.getPackages(separator)));
 
-        Path fullPathToClass = Paths.get(rootDir, javaClass.getFullPath(separator));
+        Path fullPathToClass = Paths.get(rootDir, javaClass.getFullPathWithExtension(separator));
         Files.write(fullPathToClass, javaClass.getContent().getBytes());
     }
 }

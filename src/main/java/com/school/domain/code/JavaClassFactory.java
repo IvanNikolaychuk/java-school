@@ -8,7 +8,6 @@ import com.github.javaparser.ast.PackageDeclaration;
 import java.util.Optional;
 
 public class JavaClassFactory {
-
     public JavaClass from(String content) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(content);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
@@ -16,7 +15,11 @@ public class JavaClassFactory {
         String packageName = extractPackageName(result.getResult().get());
         String className = extractClassName(result.getResult().get());
 
-        return new JavaClass(className, content, packageName);
+        return new JavaClass(aPackage(packageName), className, content);
+    }
+
+    private Package aPackage(String packageName) {
+        return new Package(packageName.split("\\."));
     }
 
     private String extractClassName(CompilationUnit compilationUnit) {

@@ -38,7 +38,7 @@ public class JavaClassCompiler {
     }
 
     private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
-        File[] javaClassFile = {Paths.get(this.rootDir, javaClass.getFullPath(separator)).toFile()};
+        File[] javaClassFile = {Paths.get(this.rootDir, javaClass.getFullPathWithExtension(separator)).toFile()};
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
     }

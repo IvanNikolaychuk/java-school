@@ -1,4 +1,4 @@
-package tmp;
+package com.school;
 
 import java.nio.file.Paths;
 import java.nio.file.Path;
