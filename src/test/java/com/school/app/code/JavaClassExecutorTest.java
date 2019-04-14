@@ -1,6 +1,6 @@
 package com.school.app.code;
 
-import com.school.app.JavaClassExecutor;
+import com.school.domain.code.JavaClassExecutor;
 import com.school.domain.code.JavaClass;
 import com.school.domain.code.Package;
 import org.junit.After;
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import static java.io.File.separator;
 import static java.nio.file.Files.readAllBytes;

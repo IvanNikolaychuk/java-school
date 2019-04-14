@@ -1,6 +1,6 @@
 package com.school.contoller;
 
-import com.school.app.JavaClassExecutor;
+import com.school.domain.code.JavaClassExecutor;
 import com.school.domain.code.JavaClass;
 import com.school.domain.code.JavaClassFactory;
 import org.springframework.http.ResponseEntity;

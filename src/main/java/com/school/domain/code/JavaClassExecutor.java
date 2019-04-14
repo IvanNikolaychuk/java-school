@@ -1,6 +1,5 @@
-package com.school.app;
+package com.school.domain.code;
 
-import com.school.domain.code.JavaClass;
 import com.school.domain.code.creator.JavaClassFileCreator;
 import com.school.domain.code.compiler.CompilationResult;
 import com.school.domain.code.compiler.JavaClassCompiler;
