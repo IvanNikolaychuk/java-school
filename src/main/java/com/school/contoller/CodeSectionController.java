@@ -1,8 +1,6 @@
 package com.school.contoller;
 
-import com.school.domain.code.JavaClassExecutor;
-import com.school.domain.code.JavaClass;
-import com.school.domain.code.JavaClassFactory;
+import com.school.domain.code.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +15,11 @@ import static org.springframework.http.HttpStatus.OK;
 public class CodeSectionController {
     private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + "academy";
 
-    private final JavaClassExecutor javaClassExecutor;
     private final JavaClassFactory javaClassFactory;
+    private final ProgramExecutor programExecutor;
 
     public CodeSectionController() {
-        this.javaClassExecutor = new JavaClassExecutor(ROOT_DIR_PATH);
+        this.programExecutor = new ProgramExecutor(new JavaClassExecutor(ROOT_DIR_PATH));
         this.javaClassFactory = new JavaClassFactory();
     }
 
@@ -31,10 +29,11 @@ public class CodeSectionController {
     }
 
     @RequestMapping(value = "/runCode", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<String> test(@RequestParam String code) {
+    public @ResponseBody ResponseEntity<String> test(@RequestParam String code,
+                                                     @RequestParam(required = false) String input) {
         try {
             JavaClass javaClass = javaClassFactory.from(code);
-            javaClassExecutor.run(javaClass);
+            programExecutor.execute(new Program(javaClass, input, ROOT_DIR_PATH));
         } catch (Exception e) {
             return new ResponseEntity<>("Ooops, something is wrong :(", INTERNAL_SERVER_ERROR);
         }

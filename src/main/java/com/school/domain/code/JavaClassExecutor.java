@@ -20,7 +20,7 @@ public class JavaClassExecutor {
         this.javaClassRunner = new JavaMainMethodRunner(rootDir);
     }
 
-    public void run(JavaClass javaClass) throws Exception {
+    public void execute(JavaClass javaClass) throws Exception {
         javaClassFileCreator.create(javaClass);
         CompilationResult result = javaClassCompiler.compile(javaClass);
         if (result.isSuccessful()) {

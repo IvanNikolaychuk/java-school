@@ -44,7 +44,7 @@ public class JavaClassExecutorTest {
 
     @Test
     public void shouldExecutePassedClass() throws Exception {
-        new JavaClassExecutor(ROOT_DIR).run(aTemplateJavaClass());
+        new JavaClassExecutor(ROOT_DIR).execute(aTemplateJavaClass());
 
         Assert.assertTrue(EXPECTED_JAVA_CLASS_PATH.toFile().exists());
         Assert.assertTrue(EXPECTED_CLASS_PATH.toFile().exists());
@@ -53,7 +53,7 @@ public class JavaClassExecutorTest {
 
     @Test
     public void shouldFailOnCompilationWhenCannotCompile() throws Exception {
-        new JavaClassExecutor(ROOT_DIR).run(aNonCompilingClass());
+        new JavaClassExecutor(ROOT_DIR).execute(aNonCompilingClass());
 
         Assert.assertTrue(EXPECTED_CLASS_PATH.toFile().exists());
         Assert.assertFalse(EXPECTED_JAVA_CLASS_PATH.toFile().exists());
