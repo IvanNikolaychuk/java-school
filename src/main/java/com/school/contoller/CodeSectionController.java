@@ -19,7 +19,7 @@ public class CodeSectionController {
     private final ProgramExecutor programExecutor;
 
     public CodeSectionController() {
-        this.programExecutor = new ProgramExecutor(new JavaClassExecutor(ROOT_DIR_PATH));
+        this.programExecutor = new ProgramExecutor(ROOT_DIR_PATH);
         this.javaClassFactory = new JavaClassFactory();
     }
 
