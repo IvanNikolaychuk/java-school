@@ -2,3 +2,7 @@
     width:90%;
     height: 30em;
 }
+
+#input, #output {
+    width:30%;
+}
