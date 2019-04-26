@@ -6,3 +6,105 @@
 #input, #output {
     width:30%;
 }
+
+
+/* Task section */
+#task-section {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin: auto;
+    margin-top: 10px;
+    width:90%;
+    height: 600px;
+    background: #EFEEEE;
+}
+
+
+#task-section div {
+    display: inline-block;
+}
+
+
+#task-section textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+/* title  section
+
+TODO:
+- border radius 2 times
+*/
+
+.title {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width:100%;
+    font-size: 1.25em;
+    height: 10%;
+    color:#fff;
+    background-color: #536999;
+}
+
+/*
+TODO:
+padding 1%
+*/
+.title div {
+    width: 15%;
+    height: 100%;
+    padding-top: 1%;
+}
+
+.title .task-title {
+    padding-left: 3%;
+}
+
+.title .run-code {
+    border-left: 2px solid #99A7CC;
+}
+
+.title .run-code, .title .help {
+    cursor: pointer;
+    text-align: center;
+    border-right: 2px solid #99A7CC;
+}
+
+.title .task-title {
+    width: 45%;
+}
+
+/* Task */
+.task {
+    width: 100%;
+    height: 90%;
+}
+
+.task-condition {
+    text-align: center;
+    float:left;
+    border-right: 5px solid #DADBDA;
+    width: 25%;
+    height: 100%;
+}
+
+.program-section {
+    width: 75%;
+    height: 100%;
+}
+
+.code-section {
+    width: 100%;
+    border-bottom: 5px solid #DADBDA;
+    height: 60%;
+}
+
+.input-section, .output-section  {
+    width: 50%;
+    height: 40%;
+}
+
+.output-section {
+    float: right;
+}
