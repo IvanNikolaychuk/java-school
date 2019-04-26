@@ -2,6 +2,8 @@ package com.school.domain.code;
 
 import java.util.Optional;
 
+import static java.io.File.separator;
+
 public class Program {
     private final JavaClass javaClass;
     private final String input;
@@ -24,4 +26,27 @@ public class Program {
     public String getRootDir() {
         return rootDir;
     }
+
+    public String relativePathToInput() {
+        return getJavaClass().getPackages(separator) + separator + "input.txt";
+    }
+
+    public String fullPathToInput() {
+        return rootDir + separator + relativePathToInput();
+    }
+
+    public String fullPathToOutput() {
+        return rootDir + separator + relativePathToOutput();
+    }
+
+    public String relativePathToOutput() {
+        return getJavaClass().getPackages(separator) + separator + "output.txt";
+    }
+
+    public Program withJavaClass(JavaClass javaClass) {
+        return new Program(javaClass, input, rootDir);
+    }
+
 }
+
+

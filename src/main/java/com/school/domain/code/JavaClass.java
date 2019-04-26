@@ -34,4 +34,8 @@ public class JavaClass {
     private String getExtension() {
         return ".java";
     }
+
+    public JavaClass withContent(String content) {
+        return new JavaClass(classPackage, name, content);
+    }
 }

@@ -8,7 +8,7 @@ import com.github.javaparser.ast.PackageDeclaration;
 import java.util.Optional;
 
 public class JavaClassFactory {
-    public JavaClass from(String content) {
+    public JavaClass create(String content) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(content);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 

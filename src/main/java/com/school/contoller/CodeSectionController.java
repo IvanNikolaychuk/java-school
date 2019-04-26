@@ -15,12 +15,12 @@ import static org.springframework.http.HttpStatus.OK;
 public class CodeSectionController {
     private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + "academy";
 
-    private final JavaClassFactory javaClassFactory;
+    private final ProgramFactory programFactory;
     private final ProgramExecutor programExecutor;
 
     public CodeSectionController() {
         this.programExecutor = new ProgramExecutor(ROOT_DIR_PATH);
-        this.javaClassFactory = new JavaClassFactory();
+        this.programFactory = new ProgramFactory();
     }
 
     @RequestMapping("/code")
@@ -32,8 +32,8 @@ public class CodeSectionController {
     public @ResponseBody ResponseEntity<String> test(@RequestParam String code,
                                                      @RequestParam(required = false) String input) {
         try {
-            JavaClass javaClass = javaClassFactory.from(code);
-            programExecutor.execute(new Program(javaClass, input, ROOT_DIR_PATH));
+            Program program = programFactory.create(code, input, ROOT_DIR_PATH);
+            programExecutor.execute(program);
         } catch (Exception e) {
             return new ResponseEntity<>("Ooops, something is wrong :(", INTERNAL_SERVER_ERROR);
         }
