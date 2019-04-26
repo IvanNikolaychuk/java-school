@@ -10,7 +10,8 @@ $(document).ready(function() {
                 input: $input
             }
         }).done(function(data) {
-            alert(data);
+            var output = JSON.parse(data).output;
+            $("#output").text(output);
         }).fail(function() {
             alert('Oops, something is wrong...')
         })

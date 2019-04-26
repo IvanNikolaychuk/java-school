@@ -2,6 +2,10 @@ package com.school.domain.code;
 
 import com.school.domain.code.creator.FileFactory;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class ProgramExecutor {
     private final JavaClassExecutor javaClassExecutor;
 
@@ -9,11 +13,18 @@ public class ProgramExecutor {
         this.javaClassExecutor = new JavaClassExecutor(rootDirPath);
     }
 
-    public void execute(Program program) throws Exception {
+    public ProgramExecutionResult execute(Program program) throws Exception {
         if (program.getInput().isPresent()) {
             aFileFactory(program.getRootDir()).create(program.relativePathToInput(), program.getInput().get());
         }
-        javaClassExecutor.execute(program.getJavaClass());
+        JavaClassExecutionResult javaClassExecutionResult = javaClassExecutor.execute(program.getJavaClass());
+
+        if (javaClassExecutionResult.isCompilationSucceed()) {
+            byte[] content = Files.readAllBytes(Paths.get(program.fullPathToOutput()));
+            return new ProgramExecutionResult(javaClassExecutionResult, new String(content));
+        } else {
+            return new ProgramExecutionResult(javaClassExecutionResult, "");
+        }
     }
 
     private FileFactory aFileFactory(String rootDir) {

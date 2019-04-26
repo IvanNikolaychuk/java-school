@@ -24,13 +24,14 @@ public class JavaClassExecutor {
         this.javaClassRunner = new JavaMainMethodRunner(rootDir);
     }
 
-    public void execute(JavaClass javaClass) throws Exception {
+    public JavaClassExecutionResult execute(JavaClass javaClass) throws Exception {
         javaClassFileFactory.create(javaClass.getFullPathWithExtension(separator), javaClass.getContent());
         CompilationResult result = javaClassCompiler.compile(javaClass);
         if (result.isSuccessful()) {
             javaClassRunner.run(javaClass);
+            return JavaClassExecutionResult.successfullyCompiled();
         } else {
-            LOGGER.error("There is an error during compilation. \n {} ", result.details());
+            return JavaClassExecutionResult.compilationFailed(result.details());
         }
     }
 
