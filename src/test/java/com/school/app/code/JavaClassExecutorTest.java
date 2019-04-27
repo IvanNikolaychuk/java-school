@@ -21,6 +21,7 @@ public class JavaClassExecutorTest {
     private static final String FIRST_PACKAGE_PART = "com";
     private static final String SECOND_PACKAGE_PART = "school";
     private static final String CLASS_PACKAGE = FIRST_PACKAGE_PART + separator + SECOND_PACKAGE_PART;
+    private static final String TASK_ID = "taskId";
 
     private static final String TEMPLATE_FULL_NAME = "Template.java";
     private static final String TEXT_FILE_FULL_NAME = "test.txt";
@@ -30,9 +31,9 @@ public class JavaClassExecutorTest {
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
 
     private static final Path EXPECTED_JAVA_CLASS_PATH =
-            Paths.get(ROOT_DIR + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".class");
+            Paths.get(ROOT_DIR + separator + TASK_ID + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".class");
     private static final Path EXPECTED_CLASS_PATH =
-            Paths.get(ROOT_DIR + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".java");
+            Paths.get(ROOT_DIR + separator + TASK_ID + separator + CLASS_PACKAGE + separator + CLASS_NAME + ".java");
     private static final Path EXPECTED_TEXT_FILE_PATH = Paths.get(TMP_DIR + TEXT_FILE_FULL_NAME);
 
     @After
@@ -61,14 +62,19 @@ public class JavaClassExecutorTest {
     }
 
     private JavaClass aNonCompilingClass() {
-        return new JavaClass(new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART), CLASS_NAME,
+        return new JavaClass(TASK_ID,
+                new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
+                CLASS_NAME,
                 "Something that will not compile");
     }
 
     private JavaClass aTemplateJavaClass() throws IOException {
         Path pathToTemplate = Paths.get(TEMPLATE_DIR + separator + TEMPLATE_FULL_NAME);
 
-        return new JavaClass(new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART), CLASS_NAME,
+        return new JavaClass(
+                TASK_ID,
+                new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
+                CLASS_NAME,
                 new String(readAllBytes(pathToTemplate)));
     }
 }

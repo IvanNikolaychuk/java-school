@@ -7,17 +7,19 @@ import java.nio.file.Paths;
 import static java.io.File.separator;
 
 public class FileFactory {
-    private final String rootDir;
+    public void create(String rootDir, String pathToFile, String content) throws Exception {
+        String dir = pathToFile.substring(0, pathToFile.lastIndexOf(separator));
+        Files.createDirectories(Paths.get(rootDir, dir));
 
-    public FileFactory(String rootDir) {
-        this.rootDir = rootDir;
+        Path fullPath = Paths.get(rootDir, pathToFile);
+        Files.write(fullPath, content.getBytes());
     }
 
     public void create(String fullPathToFile, String content) throws Exception {
         String dir = fullPathToFile.substring(0, fullPathToFile.lastIndexOf(separator));
-        Files.createDirectories(Paths.get(rootDir, dir));
+        Files.createDirectories(Paths.get(dir));
 
-        Path fullPathToClass = Paths.get(rootDir, fullPathToFile);
+        Path fullPathToClass = Paths.get(fullPathToFile);
         Files.write(fullPathToClass, content.getBytes());
     }
 }

@@ -5,14 +5,16 @@ import com.school.utils.RandomString;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+
 public class CodeRunnerTest {
-    private CodeRunner codeRunner = new CodeRunner(System.getProperty("java.io.tmpdir"));
+    private CodeRunner codeRunner = new CodeRunner(System.getProperty("java.io.tmpdir") + File.separator + "academy");
 
     @Test
     public void shouldRunCodeWithoutInput() throws Exception {
         String text = "Hello";
 
-        ProgramExecutionResult result = codeRunner.run(codeWithoutScanner(text), "");
+        ProgramExecutionResult result = codeRunner.run(RandomString.generate(), codeWithoutScanner(text), "");
 
         Assert.assertEquals(result.getOutput(), text);
     }
@@ -22,7 +24,7 @@ public class CodeRunnerTest {
         String text = "Hello";
         String input = "Ivan";
 
-        ProgramExecutionResult result = codeRunner.run(codeWithScanner(text), input);
+        ProgramExecutionResult result = codeRunner.run(RandomString.generate(), codeWithScanner(text), input);
 
         Assert.assertEquals(result.getOutput(), text + input);
     }

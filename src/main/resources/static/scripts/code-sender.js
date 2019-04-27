@@ -7,7 +7,8 @@ $(document).ready(function() {
             type:'post',
             data: {
                 code: $code,
-                input: $input
+                input: $input,
+                taskId: 'taskId'
             }
         }).done(function(data) {
             var output = JSON.parse(data).output;

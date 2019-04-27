@@ -17,14 +17,14 @@ public class JavaMainMethodRunner {
     }
 
     public void run(JavaClass javaClass) throws Exception {
-        aClassLoader().loadClass(javaClass.getFullPath(SEPARATOR))
+        aClassLoader(javaClass.getTaskId()).loadClass(javaClass.getFullPath(SEPARATOR))
                 .getMethod("main", String[].class)
                 .invoke(null, emptyArgs());
     }
 
-    private URLClassLoader aClassLoader() throws MalformedURLException {
+    private URLClassLoader aClassLoader(String taskId) throws MalformedURLException {
         ClassLoader classLoader = JavaMainMethodRunner.class.getClassLoader();
-        return new URLClassLoader(new URL[]{Paths.get(this.rootDir).toUri().toURL()}, classLoader);
+        return new URLClassLoader(new URL[]{Paths.get(this.rootDir, taskId).toUri().toURL()}, classLoader);
     }
 
     private Object[] emptyArgs() {

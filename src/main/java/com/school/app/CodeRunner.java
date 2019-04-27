@@ -16,8 +16,8 @@ public class CodeRunner {
         this.rootDir = rootDir;
     }
 
-    public ProgramExecutionResult run(String code, String input) throws Exception {
-        Program program = programFactory.create(code, input, rootDir);
+    public ProgramExecutionResult run(String taskId, String code, String input) throws Exception {
+        Program program = programFactory.create(taskId, code, input, rootDir);
         return programExecutor.execute(program);
     }
 }

@@ -10,8 +10,10 @@ public class Program {
     private final JavaClass javaClass;
     private final String input;
     private final String rootDir;
+    private final String taskId;
 
-    Program(JavaClass javaClass, String input, String rootDir) {
+    Program(String taskId, JavaClass javaClass, String input, String rootDir) {
+        this.taskId = taskId;
         this.javaClass = javaClass;
         this.input = input;
         this.rootDir = rootDir;
@@ -21,15 +23,15 @@ public class Program {
         return javaClass;
     }
 
-    Optional<String> getInput() {
-        return input.isEmpty() ? Optional.empty() : Optional.of(input);
-    }
-
-    String getRootDir() {
+    public String getRootDir() {
         return rootDir;
     }
 
-    String relativePathToInput() {
+    public Optional<String> getInput() {
+        return input.isEmpty() ? Optional.empty() : Optional.of(input);
+    }
+
+    public String relativePathToInput() {
         return getJavaClass().getPackages(separator) + separator + "input.txt";
     }
 
@@ -41,14 +43,17 @@ public class Program {
         return getJavaClass().getPackages(separator) + separator + "output.txt";
     }
 
-    String fullPathToOutput() {
+    public String fullPathToOutput() {
         return rootDir + separator + relativePathToOutput();
     }
 
     Program replaceJavaClass(JavaClass javaClass) {
-        return new Program(javaClass, input, rootDir);
+        return new Program(taskId, javaClass, input, rootDir);
     }
 
+    public String getTaskId() {
+        return taskId;
+    }
 }
 
 

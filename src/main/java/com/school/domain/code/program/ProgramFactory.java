@@ -12,9 +12,9 @@ public class ProgramFactory {
         this.inputOutputStreamsDecorator = new InputOutputStreamsDecorator();
     }
 
-    public Program create(String content, String input, String rootDir) {
-        JavaClass javaClass = javaClassFactory.create(content);
-        Program program = new Program(javaClass, input, rootDir);
+    public Program create(String taskId, String content, String input, String rootDir) {
+        JavaClass javaClass = javaClassFactory.create(taskId, content);
+        Program program = new Program(taskId, javaClass, input, rootDir);
 
         return inputOutputStreamsDecorator.decorateWithInputOutput(program);
     }

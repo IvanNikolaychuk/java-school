@@ -4,8 +4,10 @@ public class JavaClass {
     private String content;
     private Package classPackage;
     private String name;
+    private String taskId;
 
-    public JavaClass(Package classPackage, String name, String content) {
+    public JavaClass(String taskId, Package classPackage, String name, String content) {
+        this.taskId = taskId;
         this.classPackage = classPackage;
         this.name = name;
         this.content = content;
@@ -35,7 +37,11 @@ public class JavaClass {
         return ".java";
     }
 
+    public String getTaskId() {
+        return taskId;
+    }
+
     public JavaClass withContent(String content) {
-        return new JavaClass(classPackage, name, content);
+        return new JavaClass(taskId, classPackage, name, content);
     }
 }

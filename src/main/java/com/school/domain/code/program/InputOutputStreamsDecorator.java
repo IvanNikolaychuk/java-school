@@ -7,6 +7,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import com.school.domain.code.file.InputOutputHelper;
 import com.school.domain.code.javaclass.JavaClass;
 import com.school.domain.code.program.Program;
 import org.apache.logging.log4j.util.Strings;
@@ -48,10 +49,14 @@ class InputOutputStreamsDecorator {
     }
 
     private BlockStmt decorate(Program program, BlockStmt body) {
+        InputOutputHelper inputOutputHelper = new InputOutputHelper(program.getRootDir());
+        String fullPathToOutput = inputOutputHelper.fullPathToOutput(program.getTaskId());
+        String fullPathToInput = inputOutputHelper.fullPathToInput(program.getTaskId());
+
         return new BlockStmt().addStatement(parseStatement(
                 "try (\n" +
-                        "PrintStream out = new PrintStream(new File(\"" + normalize(program.fullPathToOutput()) + "\"));\n" +
-                        "InputStream in = new FileInputStream(new File(\"" + normalize(program.fullPathToInput()) + "\"))){\n" +
+                        "PrintStream out = new PrintStream(new File(\"" + normalize(fullPathToOutput) + "\"));\n" +
+                        "InputStream in = new FileInputStream(new File(\"" + normalize(fullPathToInput) + "\"))){\n" +
                         "System.setIn(in);\n" +
                         "System.setOut(out);\n" +
                         toString(body.getStatements()) +

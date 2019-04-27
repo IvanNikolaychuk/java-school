@@ -8,14 +8,14 @@ import com.github.javaparser.ast.PackageDeclaration;
 import java.util.Optional;
 
 public class JavaClassFactory {
-    public JavaClass create(String content) {
+    public JavaClass create(String taskId, String content) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(content);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 
         String packageName = extractPackageName(result.getResult().get());
         String className = extractClassName(result.getResult().get());
 
-        return new JavaClass(aPackage(packageName), className, content);
+        return new JavaClass(taskId, aPackage(packageName), className, content);
     }
 
     private Package aPackage(String packageName) {
