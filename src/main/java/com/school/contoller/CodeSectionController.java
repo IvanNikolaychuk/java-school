@@ -1,7 +1,7 @@
 package com.school.contoller;
 
 import com.school.app.CodeRunner;
-import com.school.domain.code.*;
+import com.school.domain.code.program.ProgramExecutionResult;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.OK;
-import static sun.plugin2.util.PojoUtil.toJson;
 
 @Controller
 public class CodeSectionController {

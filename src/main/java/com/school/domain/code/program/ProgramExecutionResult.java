@@ -1,4 +1,6 @@
-package com.school.domain.code;
+package com.school.domain.code.program;
+
+import com.school.domain.code.javaclass.JavaClassExecutionResult;
 
 public class ProgramExecutionResult {
     private String output;

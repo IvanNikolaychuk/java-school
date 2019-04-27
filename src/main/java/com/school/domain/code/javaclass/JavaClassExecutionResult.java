@@ -1,4 +1,4 @@
-package com.school.domain.code;
+package com.school.domain.code.javaclass;
 
 public class JavaClassExecutionResult {
     private final boolean compilationSucceed;

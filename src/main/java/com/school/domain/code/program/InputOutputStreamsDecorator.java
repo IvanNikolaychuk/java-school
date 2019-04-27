@@ -1,4 +1,4 @@
-package com.school.domain.code;
+package com.school.domain.code.program;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -7,6 +7,8 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.program.Program;
 import org.apache.logging.log4j.util.Strings;
 
 import java.io.*;
@@ -38,7 +40,7 @@ class InputOutputStreamsDecorator {
                 }
             }
             JavaClass javaClass = program.getJavaClass().withContent(compilationUnit.toString());
-            return program.withJavaClass(javaClass);
+            return program.replaceJavaClass(javaClass);
         }
 
         return program;

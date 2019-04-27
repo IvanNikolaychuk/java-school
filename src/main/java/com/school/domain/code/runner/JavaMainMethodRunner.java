@@ -1,6 +1,6 @@
 package com.school.domain.code.runner;
 
-import com.school.domain.code.JavaClass;
+import com.school.domain.code.javaclass.JavaClass;
 
 import java.net.MalformedURLException;
 import java.net.URL;

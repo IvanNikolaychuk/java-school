@@ -1,4 +1,4 @@
-package com.school.domain.code;
+package com.school.domain.code.javaclass;
 
 public class JavaClass {
     private String content;
@@ -15,7 +15,7 @@ public class JavaClass {
         return content;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 

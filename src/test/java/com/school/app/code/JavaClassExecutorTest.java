@@ -1,8 +1,8 @@
 package com.school.app.code;
 
-import com.school.domain.code.JavaClassExecutor;
-import com.school.domain.code.JavaClass;
-import com.school.domain.code.Package;
+import com.school.domain.code.javaclass.JavaClassExecutor;
+import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.javaclass.Package;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

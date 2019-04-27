@@ -1,6 +1,4 @@
-package com.school.domain.code.creator;
-
-import com.school.domain.code.JavaClass;
+package com.school.domain.code.file;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

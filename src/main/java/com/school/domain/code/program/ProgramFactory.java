@@ -1,4 +1,7 @@
-package com.school.domain.code;
+package com.school.domain.code.program;
+
+import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.javaclass.JavaClassFactory;
 
 public class ProgramFactory {
     private final JavaClassFactory javaClassFactory;

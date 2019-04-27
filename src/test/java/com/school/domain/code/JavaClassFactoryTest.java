@@ -1,5 +1,7 @@
 package com.school.domain.code;
 
+import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.javaclass.JavaClassFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

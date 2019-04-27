@@ -1,4 +1,6 @@
-package com.school.domain.code;
+package com.school.domain.code.program;
+
+import com.school.domain.code.javaclass.JavaClass;
 
 import java.util.Optional;
 
@@ -9,41 +11,41 @@ public class Program {
     private final String input;
     private final String rootDir;
 
-    public Program(JavaClass javaClass, String input, String rootDir) {
+    Program(JavaClass javaClass, String input, String rootDir) {
         this.javaClass = javaClass;
         this.input = input;
         this.rootDir = rootDir;
     }
 
-    public JavaClass getJavaClass() {
+    JavaClass getJavaClass() {
         return javaClass;
     }
 
-    public Optional<String> getInput() {
+    Optional<String> getInput() {
         return input.isEmpty() ? Optional.empty() : Optional.of(input);
     }
 
-    public String getRootDir() {
+    String getRootDir() {
         return rootDir;
     }
 
-    public String relativePathToInput() {
+    String relativePathToInput() {
         return getJavaClass().getPackages(separator) + separator + "input.txt";
     }
 
-    public String fullPathToInput() {
+    String fullPathToInput() {
         return rootDir + separator + relativePathToInput();
     }
 
-    public String relativePathToOutput() {
+    private String relativePathToOutput() {
         return getJavaClass().getPackages(separator) + separator + "output.txt";
     }
 
-    public String fullPathToOutput() {
+    String fullPathToOutput() {
         return rootDir + separator + relativePathToOutput();
     }
 
-    public Program withJavaClass(JavaClass javaClass) {
+    Program replaceJavaClass(JavaClass javaClass) {
         return new Program(javaClass, input, rootDir);
     }
 

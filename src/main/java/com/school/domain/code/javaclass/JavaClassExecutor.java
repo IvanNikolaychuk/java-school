@@ -1,13 +1,11 @@
-package com.school.domain.code;
+package com.school.domain.code.javaclass;
 
-import com.school.domain.code.creator.FileFactory;
+import com.school.domain.code.file.FileFactory;
 import com.school.domain.code.compiler.CompilationResult;
 import com.school.domain.code.compiler.JavaClassCompiler;
 import com.school.domain.code.runner.JavaMainMethodRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
 
 import static java.io.File.*;
 

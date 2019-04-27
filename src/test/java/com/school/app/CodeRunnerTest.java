@@ -1,6 +1,6 @@
 package com.school.app;
 
-import com.school.domain.code.ProgramExecutionResult;
+import com.school.domain.code.program.ProgramExecutionResult;
 import com.school.utils.RandomString;
 import org.junit.Assert;
 import org.junit.Test;

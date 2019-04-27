@@ -1,6 +1,8 @@
-package com.school.domain.code;
+package com.school.domain.code.program;
 
-import com.school.domain.code.creator.FileFactory;
+import com.school.domain.code.file.FileFactory;
+import com.school.domain.code.javaclass.JavaClassExecutionResult;
+import com.school.domain.code.javaclass.JavaClassExecutor;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

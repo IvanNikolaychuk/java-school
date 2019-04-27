@@ -1,9 +1,9 @@
 package com.school.app;
 
-import com.school.domain.code.Program;
-import com.school.domain.code.ProgramExecutionResult;
-import com.school.domain.code.ProgramExecutor;
-import com.school.domain.code.ProgramFactory;
+import com.school.domain.code.program.Program;
+import com.school.domain.code.program.ProgramExecutionResult;
+import com.school.domain.code.program.ProgramExecutor;
+import com.school.domain.code.program.ProgramFactory;
 
 public class CodeRunner {
     private final String rootDir;

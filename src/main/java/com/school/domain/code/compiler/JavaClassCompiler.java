@@ -1,6 +1,6 @@
 package com.school.domain.code.compiler;
 
-import com.school.domain.code.JavaClass;
+import com.school.domain.code.javaclass.JavaClass;
 
 import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
