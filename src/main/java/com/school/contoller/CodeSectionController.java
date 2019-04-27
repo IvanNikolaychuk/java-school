@@ -31,7 +31,7 @@ public class CodeSectionController {
 
     @RequestMapping(value = "/runCode", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<String> test(@RequestParam String code,
-                                                     @RequestParam(required = false) String input) {
+                                                     @RequestParam(required = false, defaultValue = "") String input) {
         try {
             ProgramExecutionResult result = codeRunner.run(code, input);
             return new ResponseEntity<>(new JSONObject(result).toString(), OK);
