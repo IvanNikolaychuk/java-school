@@ -35,12 +35,12 @@ public class Program {
         return rootDir + separator + relativePathToInput();
     }
 
-    public String fullPathToOutput() {
-        return rootDir + separator + relativePathToOutput();
-    }
-
     public String relativePathToOutput() {
         return getJavaClass().getPackages(separator) + separator + "output.txt";
+    }
+
+    public String fullPathToOutput() {
+        return rootDir + separator + relativePathToOutput();
     }
 
     public Program withJavaClass(JavaClass javaClass) {

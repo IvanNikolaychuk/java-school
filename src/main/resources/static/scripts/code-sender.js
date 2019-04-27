@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $("#run-code").click(function() {
-        var $code = $("#code").val();
-        var $input = $('#input').val();
+    $("#task-section .run-code").click(function() {
+        var $code = $("#task-section .code-section textarea").val();
+        var $input = $('#task-section .input-section textarea').val();
         $.ajax({
             url:'/runCode',
             type:'post',
@@ -11,7 +11,7 @@ $(document).ready(function() {
             }
         }).done(function(data) {
             var output = JSON.parse(data).output;
-            $("#output").text(output);
+            $("#task-section .output-section textarea").text(output);
         }).fail(function() {
             alert('Oops, something is wrong...')
         })
