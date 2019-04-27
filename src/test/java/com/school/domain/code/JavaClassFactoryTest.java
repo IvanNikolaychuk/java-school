@@ -26,7 +26,7 @@ public class JavaClassFactoryTest {
     public void shouldCreateCorrectJavaClassRepresentation() {
         JavaClassFactory factory = new JavaClassFactory();
 
-        JavaClass result = factory.create("taskId", classContent);
+        JavaClass result = factory.create("rootDir","taskId", classContent);
 
         assertEquals(result.getPackages("."), CLASS_PACKAGE);
         assertEquals(result.getName(), CLASS_NAME);

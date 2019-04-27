@@ -40,8 +40,4 @@ public class JavaClass {
     public String getTaskId() {
         return taskId;
     }
-
-    public JavaClass withContent(String content) {
-        return new JavaClass(taskId, classPackage, name, content);
-    }
 }

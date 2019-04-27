@@ -9,20 +9,22 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.school.domain.code.file.InputOutputHelper;
 import com.school.domain.code.javaclass.JavaClass;
-import com.school.domain.code.program.Program;
 import org.apache.logging.log4j.util.Strings;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.github.javaparser.StaticJavaParser.parseStatement;
 
-class InputOutputStreamsDecorator {
-    Program decorateWithInputOutput(Program program) {
+public class InputOutputStreamsDecorator {
+    public String decorateWithInputOutput(String rootDir, String taskId, String content) {
         CompilationUnit compilationUnit = new JavaParser()
-                .parse(program.getJavaClass().getContent())
+                .parse(content)
                 .getResult()
                 .get();
 
@@ -31,7 +33,7 @@ class InputOutputStreamsDecorator {
                 MethodDeclaration mainMethod = (MethodDeclaration) node;
                 Optional<BlockStmt> oldBlock = mainMethod.getBody();
                 if (oldBlock.isPresent()) {
-                    BlockStmt newBlock = decorate(program, oldBlock.get());
+                    BlockStmt newBlock = decorate(rootDir, taskId, oldBlock.get());
                     mainMethod.replace(oldBlock.get(), newBlock);
                     mainMethod.addThrownException(Exception.class);
                     compilationUnit.addImport(PrintStream.class);
@@ -40,18 +42,17 @@ class InputOutputStreamsDecorator {
                     compilationUnit.addImport(FileInputStream.class);
                 }
             }
-            JavaClass javaClass = program.getJavaClass().withContent(compilationUnit.toString());
-            return program.replaceJavaClass(javaClass);
+
+            return compilationUnit.toString();
         }
 
-        return program;
-
+        return content;
     }
 
-    private BlockStmt decorate(Program program, BlockStmt body) {
-        InputOutputHelper inputOutputHelper = new InputOutputHelper(program.getRootDir());
-        String fullPathToOutput = inputOutputHelper.fullPathToOutput(program.getTaskId());
-        String fullPathToInput = inputOutputHelper.fullPathToInput(program.getTaskId());
+    private BlockStmt decorate(String rootDir, String taskId, BlockStmt body) {
+        InputOutputHelper inputOutputHelper = new InputOutputHelper(rootDir);
+        String fullPathToOutput = inputOutputHelper.fullPathToOutput(taskId);
+        String fullPathToInput = inputOutputHelper.fullPathToInput(taskId);
 
         return new BlockStmt().addStatement(parseStatement(
                 "try (\n" +

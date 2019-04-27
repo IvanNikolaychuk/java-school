@@ -4,18 +4,27 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
+import com.school.domain.code.program.InputOutputStreamsDecorator;
 
 import java.util.Optional;
 
 public class JavaClassFactory {
-    public JavaClass create(String taskId, String content) {
+    private final InputOutputStreamsDecorator inputOutputStreamsDecorator;
+
+    public JavaClassFactory() {
+        inputOutputStreamsDecorator = new InputOutputStreamsDecorator();
+    }
+
+    public JavaClass create(String rootDir, String taskId, String content) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(content);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 
         String packageName = extractPackageName(result.getResult().get());
         String className = extractClassName(result.getResult().get());
 
-        return new JavaClass(taskId, aPackage(packageName), className, content);
+        String decoratedContent = inputOutputStreamsDecorator.decorateWithInputOutput(rootDir, taskId, content);
+
+        return new JavaClass(taskId, aPackage(packageName), className, decoratedContent);
     }
 
     private Package aPackage(String packageName) {
