@@ -10,8 +10,8 @@ public class ProgramFactory {
         this.javaClassFactory = new JavaClassFactory();
     }
 
-    public Program create(String taskId, String content, String input, String rootDir) {
+    public Program create(String rootDir, String taskId, String content, String input) {
         JavaClass javaClass = javaClassFactory.create(rootDir, taskId, content);
-        return new Program(taskId, javaClass, input, rootDir);
+        return new Program(rootDir, taskId, javaClass, input);
     }
 }

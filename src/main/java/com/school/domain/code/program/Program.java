@@ -10,11 +10,11 @@ public class Program {
     private final String rootDir;
     private final String taskId;
 
-    Program(String taskId, JavaClass javaClass, String input, String rootDir) {
+    Program(String rootDir, String taskId, JavaClass javaClass, String input) {
+        this.rootDir = rootDir;
         this.taskId = taskId;
         this.javaClass = javaClass;
         this.input = input;
-        this.rootDir = rootDir;
     }
 
     JavaClass getJavaClass() {

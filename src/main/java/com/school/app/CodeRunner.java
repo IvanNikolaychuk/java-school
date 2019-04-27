@@ -17,7 +17,7 @@ public class CodeRunner {
     }
 
     public ProgramExecutionResult run(String taskId, String code, String input) throws Exception {
-        Program program = programFactory.create(taskId, code, input, rootDir);
+        Program program = programFactory.create(rootDir, taskId, code, input);
         return programExecutor.execute(program);
     }
 }
