@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import static com.github.javaparser.StaticJavaParser.parseStatement;
 
 public class InputOutputStreamsDecorator {
-    public String decorateWithInputOutput(String rootDir, String taskId, String content) {
+    public String decorate(String rootDir, String taskId, String content) {
         CompilationUnit compilationUnit = new JavaParser()
                 .parse(content)
                 .getResult()

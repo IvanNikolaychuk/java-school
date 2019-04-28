@@ -6,7 +6,6 @@ import com.school.domain.code.javaclass.JavaClass;
 import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -52,6 +51,6 @@ public class JavaClassCompiler {
     }
 
     private void createFile(JavaClass javaClass) throws Exception {
-        fileFactory.create(javaClass.getFullPathWithExtension(separator), javaClass.getContent());
+        fileFactory.create(javaClass.getFullPathWithExtension(separator), javaClass.getCode());
     }
 }

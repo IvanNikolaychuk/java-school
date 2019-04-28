@@ -62,22 +62,21 @@ public class JavaClassExecutorTest {
     }
 
     private JavaClass aNonCompilingClass() {
-        return new JavaClass(
-                ROOT_DIR,
-                TASK_ID,
-                new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
-                CLASS_NAME,
-                "Something that will not compile");
+        return aJavaClass("Something that will not compile");
     }
 
     private JavaClass aTemplateJavaClass() throws IOException {
         Path pathToTemplate = Paths.get(TEMPLATE_DIR + separator + TEMPLATE_FULL_NAME);
+        return aJavaClass(new String(readAllBytes(pathToTemplate)));
+    }
 
-        return new JavaClass(
-                ROOT_DIR,
-                TASK_ID,
-                new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
-                CLASS_NAME,
-                new String(readAllBytes(pathToTemplate)));
+    private JavaClass aJavaClass(String code) {
+        return JavaClass.JavaClassBuilder.aJavaClass()
+                .withRootDir(ROOT_DIR)
+                .withTaskId(TASK_ID)
+                .withClassPackage(new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART))
+                .withName(CLASS_NAME)
+                .withCode(code)
+                .build();
     }
 }

@@ -15,16 +15,22 @@ public class JavaClassFactory {
         inputOutputStreamsDecorator = new InputOutputStreamsDecorator();
     }
 
-    public JavaClass create(String rootDir, String taskId, String content) {
-        ParseResult<CompilationUnit> result = new JavaParser().parse(content);
+    public JavaClass create(String rootDir, String taskId, String code) {
+        ParseResult<CompilationUnit> result = new JavaParser().parse(code);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 
         String packageName = extractPackageName(result.getResult().get());
         String className = extractClassName(result.getResult().get());
 
-        String decoratedContent = inputOutputStreamsDecorator.decorateWithInputOutput(rootDir, taskId, content);
+        String decoratedCode = inputOutputStreamsDecorator.decorate(rootDir, taskId, code);
 
-        return new JavaClass(rootDir, taskId, aPackage(packageName), className, decoratedContent);
+        return JavaClass.JavaClassBuilder.aJavaClass()
+                .withRootDir(rootDir)
+                .withTaskId(taskId)
+                .withClassPackage(aPackage(packageName))
+                .withName(className)
+                .withCode(decoratedCode)
+                .build();
     }
 
     private Package aPackage(String packageName) {
