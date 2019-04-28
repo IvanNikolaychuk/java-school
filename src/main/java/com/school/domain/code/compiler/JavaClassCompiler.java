@@ -1,5 +1,6 @@
 package com.school.domain.code.compiler;
 
+import com.school.domain.code.file.FileFactory;
 import com.school.domain.code.javaclass.JavaClass;
 
 import javax.tools.*;
@@ -14,12 +15,15 @@ import static javax.tools.ToolProvider.getSystemJavaCompiler;
 
 public class JavaClassCompiler {
     private final String rootDir;
+    private final FileFactory fileFactory;
 
     public JavaClassCompiler(String rootDir) {
         this.rootDir = rootDir;
+        this.fileFactory = new FileFactory();
     }
 
-    public CompilationResult compile(JavaClass javaClass) throws IOException {
+    public CompilationResult compile(JavaClass javaClass) throws Exception {
+        createFile(javaClass);
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
         aCompilationTask(javaClass, diagnostics).call();
@@ -47,5 +51,10 @@ public class JavaClassCompiler {
 
     private StandardJavaFileManager aFileManager() {
         return getSystemJavaCompiler().getStandardFileManager(null, null, null);
+    }
+
+    private void createFile(JavaClass javaClass) throws Exception {
+        String path = rootDir + separator + javaClass.getTaskId() + separator + javaClass.getFullPathWithExtension(separator);
+        fileFactory.create(path, javaClass.getContent());
     }
 }
