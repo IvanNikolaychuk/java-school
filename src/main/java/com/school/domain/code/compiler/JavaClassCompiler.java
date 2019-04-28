@@ -14,11 +14,9 @@ import static java.io.File.separator;
 import static javax.tools.ToolProvider.getSystemJavaCompiler;
 
 public class JavaClassCompiler {
-    private final String rootDir;
     private final FileFactory fileFactory;
 
-    public JavaClassCompiler(String rootDir) {
-        this.rootDir = rootDir;
+    public JavaClassCompiler() {
         this.fileFactory = new FileFactory();
     }
 
@@ -43,7 +41,7 @@ public class JavaClassCompiler {
 
     private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
         File[] javaClassFile = {
-                Paths.get(this.rootDir, javaClass.getFullPathWithExtension(separator)).toFile(),
+                Paths.get(javaClass.getFullPathWithExtension(separator)).toFile(),
         };
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
@@ -54,7 +52,6 @@ public class JavaClassCompiler {
     }
 
     private void createFile(JavaClass javaClass) throws Exception {
-        String path = rootDir + separator + javaClass.getFullPathWithExtension(separator);
-        fileFactory.create(path, javaClass.getContent());
+        fileFactory.create(javaClass.getFullPathWithExtension(separator), javaClass.getContent());
     }
 }

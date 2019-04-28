@@ -24,7 +24,7 @@ public class JavaClassFactory {
 
         String decoratedContent = inputOutputStreamsDecorator.decorateWithInputOutput(rootDir, taskId, content);
 
-        return new JavaClass(taskId, aPackage(packageName), className, decoratedContent);
+        return new JavaClass(rootDir, taskId, aPackage(packageName), className, decoratedContent);
     }
 
     private Package aPackage(String packageName) {

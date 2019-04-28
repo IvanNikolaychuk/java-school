@@ -13,9 +13,9 @@ public class JavaClassExecutor {
     private final JavaClassCompiler javaClassCompiler;
     private final JavaMainMethodRunner javaClassRunner;
 
-    public JavaClassExecutor(String rootDir) {
-        this.javaClassCompiler = new JavaClassCompiler(rootDir);
-        this.javaClassRunner = new JavaMainMethodRunner(rootDir);
+    public JavaClassExecutor() {
+        this.javaClassCompiler = new JavaClassCompiler();
+        this.javaClassRunner = new JavaMainMethodRunner();
     }
 
     public JavaClassExecutionResult execute(JavaClass javaClass) throws Exception {

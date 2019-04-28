@@ -9,7 +9,7 @@ public class ProgramExecutor {
     private final InputOutputHelper inputOutputHelper;
 
     public ProgramExecutor(String rootDirPath) {
-        this.javaClassExecutor = new JavaClassExecutor(rootDirPath);
+        this.javaClassExecutor = new JavaClassExecutor();
         this.inputOutputHelper = new InputOutputHelper(rootDirPath);
     }
 

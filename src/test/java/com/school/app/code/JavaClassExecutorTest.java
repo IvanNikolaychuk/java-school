@@ -45,7 +45,7 @@ public class JavaClassExecutorTest {
 
     @Test
     public void shouldExecutePassedClass() throws Exception {
-        new JavaClassExecutor(ROOT_DIR).execute(aTemplateJavaClass());
+        new JavaClassExecutor().execute(aTemplateJavaClass());
 
         Assert.assertTrue(EXPECTED_JAVA_CLASS_PATH.toFile().exists());
         Assert.assertTrue(EXPECTED_CLASS_PATH.toFile().exists());
@@ -54,7 +54,7 @@ public class JavaClassExecutorTest {
 
     @Test
     public void shouldFailOnCompilationWhenCannotCompile() throws Exception {
-        new JavaClassExecutor(ROOT_DIR).execute(aNonCompilingClass());
+        new JavaClassExecutor().execute(aNonCompilingClass());
 
         Assert.assertTrue(EXPECTED_CLASS_PATH.toFile().exists());
         Assert.assertFalse(EXPECTED_JAVA_CLASS_PATH.toFile().exists());
@@ -62,7 +62,9 @@ public class JavaClassExecutorTest {
     }
 
     private JavaClass aNonCompilingClass() {
-        return new JavaClass(TASK_ID,
+        return new JavaClass(
+                ROOT_DIR,
+                TASK_ID,
                 new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
                 CLASS_NAME,
                 "Something that will not compile");
@@ -72,6 +74,7 @@ public class JavaClassExecutorTest {
         Path pathToTemplate = Paths.get(TEMPLATE_DIR + separator + TEMPLATE_FULL_NAME);
 
         return new JavaClass(
+                ROOT_DIR,
                 TASK_ID,
                 new Package(FIRST_PACKAGE_PART, SECOND_PACKAGE_PART),
                 CLASS_NAME,

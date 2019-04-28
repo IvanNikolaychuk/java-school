@@ -1,12 +1,15 @@
 package com.school.domain.code.javaclass;
 
 public class JavaClass {
+    private String rootDir;
+    private String taskId;
+
     private String content;
     private Package classPackage;
     private String name;
-    private String taskId;
 
-    public JavaClass(String taskId, Package classPackage, String name, String content) {
+    public JavaClass(String rootDir, String taskId, Package classPackage, String name, String content) {
+        this.rootDir = rootDir;
         this.taskId = taskId;
         this.classPackage = classPackage;
         this.name = name;
@@ -21,6 +24,10 @@ public class JavaClass {
         return name;
     }
 
+    public String getDirectory(String separator) {
+        return rootDir + separator + taskId ;
+    }
+
     public String getPackages(String separator) {
         return classPackage.fullPath(separator);
     }
@@ -30,11 +37,7 @@ public class JavaClass {
     }
 
     public String getFullPathWithExtension(String separator) {
-        return taskId + separator + getRelativePathWithoutExtension(separator) + getExtension();
-    }
-
-    private String getExtension() {
-        return ".java";
+        return getDirectory(separator) + separator + getRelativePathWithoutExtension(separator) + ".java";
     }
 
     public String getTaskId() {
