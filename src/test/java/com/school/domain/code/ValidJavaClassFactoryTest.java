@@ -1,6 +1,6 @@
 package com.school.domain.code;
 
-import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.javaclass.ValidJavaClass;
 import com.school.domain.code.javaclass.JavaClassFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,13 +12,13 @@ import java.util.Collection;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class JavaClassFactoryTest {
+public class ValidJavaClassFactoryTest {
     private static final String CLASS_NAME = "Main";
     private static final String CLASS_PACKAGE = "com.school";
 
     private String classContent;
 
-    public JavaClassFactoryTest(String classContent) {
+    public ValidJavaClassFactoryTest(String classContent) {
         this.classContent = classContent;
     }
 
@@ -26,7 +26,7 @@ public class JavaClassFactoryTest {
     public void shouldCreateCorrectJavaClassRepresentation() {
         JavaClassFactory factory = new JavaClassFactory();
 
-        JavaClass result = factory.create("rootDir","taskId", classContent);
+        ValidJavaClass result = factory.create("rootDir","taskId", classContent);
 
         assertEquals(result.getPackages("."), CLASS_PACKAGE);
         assertEquals(result.getName(), CLASS_NAME);

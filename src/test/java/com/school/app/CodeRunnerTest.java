@@ -32,7 +32,7 @@ public class CodeRunnerTest {
     private String codeWithoutScanner(String text) {
         return "package " + RandomString.generate() + ";\n" +
                 "\n" +
-                "public class Main {\n" +
+                "public class Test{\n" +
                 "\tpublic static void main(String[] args) {\n" +
                 "\t\tSystem.out.print(\"" + text + "\");\n" +
                 "\t}\n" +

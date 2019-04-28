@@ -15,7 +15,7 @@ public class ProgramExecutor {
 
     public ProgramExecutionResult execute(Program program) throws Exception {
         inputOutputHelper.createInputOutputFiles(program);
-        JavaClassExecutionResult javaClassExecutionResult = javaClassExecutor.execute(program.getJavaClass());
+        JavaClassExecutionResult javaClassExecutionResult = javaClassExecutor.execute(program.getAClass());
 
         if (javaClassExecutionResult.isCompilationSucceed()) {
             return new ProgramExecutionResult(javaClassExecutionResult, inputOutputHelper.readOutputContent(program));

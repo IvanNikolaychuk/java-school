@@ -1,24 +1,24 @@
 package com.school.domain.code.program;
 
-import com.school.domain.code.javaclass.JavaClass;
+import com.school.domain.code.javaclass.Class;
 
 import java.util.Optional;
 
 public class Program {
-    private final JavaClass javaClass;
+    private final Class aClass;
     private final String input;
     private final String rootDir;
     private final String taskId;
 
-    Program(String rootDir, String taskId, JavaClass javaClass, String input) {
+    Program(String rootDir, String taskId, Class aClass, String input) {
         this.rootDir = rootDir;
         this.taskId = taskId;
-        this.javaClass = javaClass;
+        this.aClass = aClass;
         this.input = input;
     }
 
-    JavaClass getJavaClass() {
-        return javaClass;
+    Class getAClass() {
+        return aClass;
     }
 
     public String getRootDir() {

@@ -15,7 +15,7 @@ public class JavaClassFactory {
         inputOutputStreamsDecorator = new InputOutputStreamsDecorator();
     }
 
-    public JavaClass create(String rootDir, String taskId, String code) {
+    public ValidJavaClass create(String rootDir, String taskId, String code) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(code);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 
@@ -24,7 +24,7 @@ public class JavaClassFactory {
 
         String decoratedCode = inputOutputStreamsDecorator.decorate(rootDir, taskId, code);
 
-        return JavaClass.JavaClassBuilder.aJavaClass()
+        return ValidJavaClass.JavaClassBuilder.aJavaClass()
                 .withRootDir(rootDir)
                 .withTaskId(taskId)
                 .withClassPackage(aPackage(packageName))

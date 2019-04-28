@@ -1,6 +1,6 @@
 package com.school.domain.code.javaclass;
 
-public class JavaClass {
+public class ValidJavaClass implements Class {
     private String rootDir;
     private String taskId;
     private Package classPackage;
@@ -8,7 +8,7 @@ public class JavaClass {
     private String name;
     private String code;
 
-    private JavaClass(String rootDir, String taskId, Package classPackage, String name, String code) {
+    private ValidJavaClass(String rootDir, String taskId, Package classPackage, String name, String code) {
         this.rootDir = rootDir;
         this.taskId = taskId;
         this.classPackage = classPackage;
@@ -28,6 +28,7 @@ public class JavaClass {
         return getPackages(separator) + separator + getName();
     }
 
+    @Override
     public String getFullPathWithExtension(String separator) {
         return getDirectory(separator) + separator + getRelativePathWithoutExtension(separator) + ".java";
     }
@@ -36,8 +37,19 @@ public class JavaClass {
         return name;
     }
 
+    @Override
     public String getCode() {
         return code;
+    }
+
+    @Override
+    public String getRootDir() {
+        return rootDir;
+    }
+
+    @Override
+    public String getTaskId() {
+        return taskId;
     }
 
     public static final class JavaClassBuilder {
@@ -79,8 +91,8 @@ public class JavaClass {
             return this;
         }
 
-        public JavaClass build() {
-            return new JavaClass(rootDir, taskId, classPackage, name, code);
+        public ValidJavaClass build() {
+            return new ValidJavaClass(rootDir, taskId, classPackage, name, code);
         }
     }
 }

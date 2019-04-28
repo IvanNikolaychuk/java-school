@@ -8,7 +8,6 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.school.domain.code.file.InputOutputHelper;
-import com.school.domain.code.javaclass.JavaClass;
 import org.apache.logging.log4j.util.Strings;
 
 import java.io.File;
