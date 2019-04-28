@@ -16,12 +16,13 @@ public class CompilationResult {
     }
 
     public String details() {
-        String result = "TODO: implement normal description";
+        StringBuilder result = new StringBuilder();
 
         for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
-            return result;
+            result.append(diagnostic.toString());
         }
-        return result;
+
+        return result.toString();
     }
 
 }
