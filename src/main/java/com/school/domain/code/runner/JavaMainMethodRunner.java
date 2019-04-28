@@ -17,7 +17,7 @@ public class JavaMainMethodRunner {
     }
 
     public void run(JavaClass javaClass) throws Exception {
-        aClassLoader(javaClass.getTaskId()).loadClass(javaClass.getFullPath(SEPARATOR))
+        aClassLoader(javaClass.getTaskId()).loadClass(javaClass.getRelativePathWithoutExtension(SEPARATOR))
                 .getMethod("main", String[].class)
                 .invoke(null, emptyArgs());
     }

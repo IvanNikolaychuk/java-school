@@ -25,12 +25,12 @@ public class JavaClass {
         return classPackage.fullPath(separator);
     }
 
-    public String getFullPath(String separator) {
+    public String getRelativePathWithoutExtension(String separator) {
         return getPackages(separator) + separator + getName();
     }
 
     public String getFullPathWithExtension(String separator) {
-        return getFullPath(separator) + getExtension();
+        return taskId + separator + getRelativePathWithoutExtension(separator) + getExtension();
     }
 
     private String getExtension() {

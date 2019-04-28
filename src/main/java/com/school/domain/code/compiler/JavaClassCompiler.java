@@ -43,7 +43,7 @@ public class JavaClassCompiler {
 
     private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
         File[] javaClassFile = {
-                Paths.get(this.rootDir, javaClass.getTaskId(), javaClass.getFullPathWithExtension(separator)).toFile()
+                Paths.get(this.rootDir, javaClass.getFullPathWithExtension(separator)).toFile(),
         };
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
@@ -54,7 +54,7 @@ public class JavaClassCompiler {
     }
 
     private void createFile(JavaClass javaClass) throws Exception {
-        String path = rootDir + separator + javaClass.getTaskId() + separator + javaClass.getFullPathWithExtension(separator);
+        String path = rootDir + separator + javaClass.getFullPathWithExtension(separator);
         fileFactory.create(path, javaClass.getContent());
     }
 }
