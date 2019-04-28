@@ -1,5 +1,9 @@
 package com.school.domain.code.runner;
 
+import com.school.domain.code.compiler.JavaClassCompiler;
+import com.school.domain.code.javaclass.Class;
+import com.school.domain.code.javaclass.JavaClassFactory;
+import com.school.domain.code.javaclass.PotentialJavaClass;
 import com.school.domain.code.javaclass.ValidJavaClass;
 
 import java.io.File;
@@ -10,8 +14,15 @@ import java.nio.file.Paths;
 
 public class JavaMainMethodRunner {
     private static final String SEPARATOR = ".";
+    private final JavaClassCompiler javaClassCompiler;
 
-    public void run(ValidJavaClass validJavaClass) throws Exception {
+    public JavaMainMethodRunner() {
+        this.javaClassCompiler = new JavaClassCompiler();
+    }
+
+    public void runMainMethod(ValidJavaClass validJavaClass) throws Exception {
+        javaClassCompiler.compile(validJavaClass);
+
         aClassLoaderFor(validJavaClass).loadClass(validJavaClass.getRelativePathWithoutExtension(SEPARATOR))
                 .getMethod("main", String[].class)
                 .invoke(null, emptyArgs());

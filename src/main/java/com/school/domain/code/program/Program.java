@@ -1,23 +1,24 @@
 package com.school.domain.code.program;
 
 import com.school.domain.code.javaclass.Class;
+import com.school.domain.code.javaclass.PotentialJavaClass;
 
 import java.util.Optional;
 
 public class Program {
-    private final Class aClass;
+    private final PotentialJavaClass aClass;
     private final String input;
     private final String rootDir;
     private final String taskId;
 
-    Program(String rootDir, String taskId, Class aClass, String input) {
+    Program(String rootDir, String taskId, PotentialJavaClass aClass, String input) {
         this.rootDir = rootDir;
         this.taskId = taskId;
         this.aClass = aClass;
         this.input = input;
     }
 
-    Class getAClass() {
+    PotentialJavaClass getPotentialClass() {
         return aClass;
     }
 

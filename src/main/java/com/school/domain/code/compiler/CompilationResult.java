@@ -25,4 +25,7 @@ public class CompilationResult {
         return result.toString();
     }
 
+    public static CompilationResult noCompilationErrors() {
+        return new CompilationResult(new DiagnosticCollector<>());
+    }
 }
