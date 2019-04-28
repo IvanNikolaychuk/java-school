@@ -20,27 +20,32 @@ public class JavaClassCompiler {
     }
 
     public CompilationResult compile(JavaClass javaClass) throws Exception {
-        createFile(javaClass);
+        return compile(javaClass.getFullPathWithExtension(separator), javaClass.getCode());
+    }
+
+    public CompilationResult compile(String fullPathWithExtension, String code) throws Exception {
+        fileFactory.create(fullPathWithExtension, code);
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
 
-        aCompilationTask(javaClass, diagnostics).call();
+        aCompilationTask(fullPathWithExtension, diagnostics).call();
         aFileManager().close();
 
         return new CompilationResult(diagnostics);
     }
 
-    private CompilationTask aCompilationTask(JavaClass javaClass, DiagnosticCollector<JavaFileObject> diagnostics) {
+    private CompilationTask aCompilationTask(String fullPathWithoutExtension,
+                                             DiagnosticCollector<JavaFileObject> diagnostics) {
         return getSystemJavaCompiler().getTask(null,
                 aFileManager(),
                 diagnostics,
                 null,
                 null,
-                aCompilationUnit(javaClass));
+                aCompilationUnit(fullPathWithoutExtension));
     }
 
-    private Iterable<? extends JavaFileObject> aCompilationUnit(JavaClass javaClass) {
+    private Iterable<? extends JavaFileObject> aCompilationUnit(String fullPathWithoutExtension) {
         File[] javaClassFile = {
-                Paths.get(javaClass.getFullPathWithExtension(separator)).toFile(),
+                Paths.get(fullPathWithoutExtension).toFile(),
         };
 
         return aFileManager().getJavaFileObjectsFromFiles(Arrays.asList(javaClassFile));
@@ -48,9 +53,5 @@ public class JavaClassCompiler {
 
     private StandardJavaFileManager aFileManager() {
         return getSystemJavaCompiler().getStandardFileManager(null, null, null);
-    }
-
-    private void createFile(JavaClass javaClass) throws Exception {
-        fileFactory.create(javaClass.getFullPathWithExtension(separator), javaClass.getCode());
     }
 }
