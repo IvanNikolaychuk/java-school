@@ -28,7 +28,7 @@ public class ProgramExecutor {
     public ProgramExecutionResult execute(Program program) throws Exception {
         CompilationResult compilationResult = javaClassCompiler.compile(program.getPotentialClass());
         if (!compilationResult.isSuccessful()) {
-            return withFailedCompilation(compilationResult);
+            return withFailedCompilation(new Compilation(compilationResult.toProblems()));
         }
 
         inputOutputHelper.createInputOutputFiles(program);

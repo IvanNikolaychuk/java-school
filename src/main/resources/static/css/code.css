@@ -12,8 +12,7 @@
 #task-section {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    margin: auto;
-    margin-top: 10px;
+    margin: 10px auto auto;
     width:90%;
     height: 600px;
     background: #EFEEEE;
@@ -100,11 +99,15 @@ padding 1%
     height: 60%;
 }
 
-.input-section, .output-section  {
-    width: 50%;
-    height: 40%;
+.input-section {
+    float: left;
 }
 
-.output-section {
+.output-section, .compilation-error {
     float: right;
+}
+
+.input-section, .output-section, .compilation-error {
+    width: 50%;
+    height: 40%;
 }

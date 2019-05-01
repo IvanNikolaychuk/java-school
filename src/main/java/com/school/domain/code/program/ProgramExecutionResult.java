@@ -1,23 +1,21 @@
 package com.school.domain.code.program;
 
-import com.school.domain.code.compiler.CompilationResult;
-
-import static com.school.domain.code.compiler.CompilationResult.noCompilationErrors;
+import static com.school.domain.code.program.Compilation.noCompilationErrors;
 
 public class ProgramExecutionResult {
     private String output;
-    private CompilationResult compilationResult;
+    private Compilation compilation;
 
-    ProgramExecutionResult(CompilationResult compilationResult, String output) {
-        this.compilationResult = compilationResult;
+    private ProgramExecutionResult(Compilation compilation, String output) {
+        this.compilation = compilation;
         this.output = output;
     }
 
-    public static ProgramExecutionResult withFailedCompilation(CompilationResult compilationResult) {
-        return new ProgramExecutionResult(compilationResult, "");
+    static ProgramExecutionResult withFailedCompilation(Compilation compilation) {
+        return new ProgramExecutionResult(compilation, "");
     }
 
-    public static ProgramExecutionResult withPassedCompilation(String programOutput) {
+    static ProgramExecutionResult withPassedCompilation(String programOutput) {
         return new ProgramExecutionResult(noCompilationErrors(), programOutput);
     }
 
@@ -25,7 +23,7 @@ public class ProgramExecutionResult {
         return output;
     }
 
-    public CompilationResult getCompilationResult() {
-        return compilationResult;
+    public Compilation getCompilation() {
+        return compilation;
     }
 }

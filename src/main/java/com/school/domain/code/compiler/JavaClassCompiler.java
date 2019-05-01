@@ -2,7 +2,6 @@ package com.school.domain.code.compiler;
 
 import com.school.domain.code.file.FileFactory;
 import com.school.domain.code.javaclass.Class;
-import com.school.domain.code.javaclass.ValidJavaClass;
 
 import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
@@ -21,17 +20,15 @@ public class JavaClassCompiler {
     }
 
     public CompilationResult compile(Class aClass) throws Exception {
-        return compile(aClass.getFullPathWithExtension(separator), aClass.getCode());
-    }
+        String fullPathToClass = aClass.getFullPathWithExtension(separator);
 
-    private CompilationResult compile(String fullPathWithExtension, String code) throws Exception {
-        fileFactory.create(fullPathWithExtension, code);
+        fileFactory.create(fullPathToClass, aClass.getCode());
+
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
-
-        aCompilationTask(fullPathWithExtension, diagnostics).call();
+        aCompilationTask(fullPathToClass, diagnostics).call();
         aFileManager().close();
 
-        return new CompilationResult(diagnostics);
+        return new CompilationResult(diagnostics, aClass);
     }
 
     private CompilationTask aCompilationTask(String fullPathWithoutExtension,

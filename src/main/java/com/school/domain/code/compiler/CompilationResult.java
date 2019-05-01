@@ -1,31 +1,30 @@
 package com.school.domain.code.compiler;
 
-import javax.tools.Diagnostic;
+import com.school.domain.code.javaclass.Class;
+
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaFileObject;
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CompilationResult {
     private final DiagnosticCollector<JavaFileObject> diagnostics;
+    private final Class aClass;
 
-    public CompilationResult(DiagnosticCollector<JavaFileObject> diagnostics) {
+    CompilationResult(DiagnosticCollector<JavaFileObject> diagnostics, Class aClass) {
         this.diagnostics = diagnostics;
+        this.aClass = aClass;
     }
 
     public boolean isSuccessful() {
         return diagnostics.getDiagnostics().isEmpty();
     }
 
-    public String details() {
-        StringBuilder result = new StringBuilder();
-
-        for (Diagnostic diagnostic : diagnostics.getDiagnostics()) {
-            result.append(diagnostic.toString());
-        }
-
-        return result.toString();
-    }
-
-    public static CompilationResult noCompilationErrors() {
-        return new CompilationResult(new DiagnosticCollector<>());
+    public List<String> toProblems() {
+        return diagnostics.getDiagnostics()
+                .stream()
+                .map(diagnostic -> diagnostic.toString().replace(aClass.getRootDir() + File.separator, ""))
+                .collect(Collectors.toList());
     }
 }
