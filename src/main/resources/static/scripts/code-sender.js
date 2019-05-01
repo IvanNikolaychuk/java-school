@@ -1,14 +1,12 @@
 $(document).ready(function() {
     $("#task-section .compilation-error").hide();
     $("#task-section .run-code").click(function() {
-        var $code = $("#task-section .code-section textarea").val();
-        var $programInput = $('#task-section .input-section textarea').val();
         $.ajax({
             url:'/runCode',
             type:'post',
             data: {
-                code: $code,
-                programInput: $programInput,
+                code: ace.edit("code-editor").getValue(),
+                programInput: $('#task-section .input-section textarea').val(),
                 taskId: 'taskId'
             }
         }).done(function(response) {

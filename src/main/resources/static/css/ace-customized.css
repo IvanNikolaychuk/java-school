@@ -1,0 +1,33 @@
+.ace_keyword {
+    color: navy !important;
+    font-weight: 600 !important;
+}
+
+.ace_comment {
+    color: grey !important;
+    font-style: italic !important;
+}
+
+.ace_string {
+    color: #090 !important;
+    font-weight: 600 !important;
+}
+
+.ace_support.ace_function {
+    color: black !important;
+    font-weight: 600 !important;
+}
+
+.ace_keyword.ace_operator {
+    color: black !important;
+    font-weight: 100 !important;
+}
+
+.ace_gutter {
+    color:#999 !important;
+    background: #e8edf3 !important;
+}
+
+.ace_gutter-cell{
+    padding-right:15px !important;
+}
