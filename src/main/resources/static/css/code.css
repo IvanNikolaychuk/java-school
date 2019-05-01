@@ -77,6 +77,30 @@ padding 1%
     width: 45%;
 }
 
+/* icons */
+.icon {
+    cursor: pointer;
+    margin-right: 10px;
+    width: 30px !important;
+    height: 30px !important;
+    vertical-align: middle;
+    background-size: cover;
+}
+
+#run-code-icon {
+    background-image: url('../icons/run-code.svg');
+}
+
+#help-icon {
+    background-image: url('../icons/help.svg');
+}
+
+#extend-window-icon {
+    /*TODO: this is a hack*/
+    margin-left: 126%;
+    background-image: url('../icons/extend.svg');
+}
+
 /* Task */
 .task {
     width: 100%;
@@ -117,20 +141,4 @@ padding 1%
 .input-section, .output-section, .compilation-error {
     width: 50%;
     height: 25%;
-}
-
-#run-code-icon, #help-icon {
-    margin-right: 10px;
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-    background-size: cover;
-}
-
-#run-code-icon {
-    background-image: url('../icons/run-code.svg');
-}
-
-#help-icon {
-    background-image: url('../icons/question-mark.svg');
 }
