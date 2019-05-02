@@ -23,11 +23,6 @@ public class CodeSectionController {
         this.codeRunner = new CodeRunner(ROOT_DIR_PATH);
     }
 
-    @RequestMapping("/code")
-    public String index() {
-        return "code";
-    }
-
     @RequestMapping(value = "/runCode", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<String> test(@RequestParam String code,
                                                      @RequestParam String taskId,
