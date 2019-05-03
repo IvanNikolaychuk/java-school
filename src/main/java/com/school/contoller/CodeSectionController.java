@@ -1,7 +1,7 @@
 package com.school.contoller;
 
 import com.school.app.CodeRunner;
-import com.school.domain.code.program.ProgramExecutionResult;
+import com.school.domain.code.program.ExecutionResult;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class CodeSectionController {
     public @ResponseBody ResponseEntity<String> run(@RequestParam String code,
                                                      @RequestParam(required = false, defaultValue = "") String programInput) {
         try {
-            ProgramExecutionResult result = codeRunner.run(code, programInput);
+            ExecutionResult result = codeRunner.run(code, programInput);
             return new ResponseEntity<>(new JSONObject(result).toString(), OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Ooops, something is wrong :(", INTERNAL_SERVER_ERROR);

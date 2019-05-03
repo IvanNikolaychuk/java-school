@@ -8,8 +8,8 @@ import com.school.domain.code.program.javaclass.PotentialJavaClass;
 import com.school.domain.code.program.javaclass.ValidJavaClass;
 import com.school.domain.code.program.runner.JavaMainMethodRunner;
 
-import static com.school.domain.code.program.ProgramExecutionResult.withFailedCompilation;
-import static com.school.domain.code.program.ProgramExecutionResult.withPassedCompilation;
+import static com.school.domain.code.program.ExecutionResult.withFailedCompilation;
+import static com.school.domain.code.program.ExecutionResult.withPassedCompilation;
 
 public class ProgramExecutor {
     private final JavaMainMethodRunner javaClassRunner;
@@ -25,7 +25,7 @@ public class ProgramExecutor {
         this.javaClassFactory = new JavaClassFactory();
     }
 
-    public ProgramExecutionResult execute(Program program) throws Exception {
+    public ExecutionResult execute(Program program) throws Exception {
         CompilationResult compilationResult = javaClassCompiler.compile(program.getPotentialClass());
         if (!compilationResult.isSuccessful()) {
             return withFailedCompilation(new Compilation(compilationResult.toProblems()));

@@ -1,12 +1,11 @@
 package com.school.app;
 
-import com.school.domain.code.program.ProgramExecutionResult;
+import com.school.domain.code.program.ExecutionResult;
 import com.school.utils.RandomString;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
-import java.util.UUID;
 
 public class CodeRunnerTest {
     private CodeRunner codeRunner = new CodeRunner();
@@ -15,7 +14,7 @@ public class CodeRunnerTest {
     public void shouldRunCodeWithoutInput() throws Exception {
         String text = "Hello";
 
-        ProgramExecutionResult result = codeRunner.run(codeWithoutScanner(text), "");
+        ExecutionResult result = codeRunner.run(codeWithoutScanner(text), "");
 
         Assert.assertEquals(result.getOutput(), text);
     }
@@ -25,14 +24,14 @@ public class CodeRunnerTest {
         String text = "Hello";
         String input = "Ivan";
 
-        ProgramExecutionResult result = codeRunner.run(codeWithScanner(text), input);
+        ExecutionResult result = codeRunner.run(codeWithScanner(text), input);
 
         Assert.assertEquals(result.getOutput(), text + input);
     }
 
     @Test
     public void shouldRunCodeThatIsNotCompiling() throws Exception {
-        ProgramExecutionResult result = codeRunner.run(codeNotCompiling(), "");
+        ExecutionResult result = codeRunner.run(codeNotCompiling(), "");
 
         Assert.assertEquals(result.getOutput(), "");
         Assert.assertEquals(result.getCompilation().getProblems(), Collections.singletonList(
