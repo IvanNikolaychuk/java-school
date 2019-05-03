@@ -1,11 +1,11 @@
 package com.school.contoller;
 
 import com.school.app.CodeLoader;
-import com.school.domain.code.program.ProgramExecutionResult;
 import com.school.domain.code.rest.Class;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -13,9 +13,11 @@ import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 public class TaskController {
-    @RequestMapping("/task/{taskId}")
-    public String index(@PathVariable String taskId) {
-        return "javaschool/task/" + taskId.replaceAll("\\.", "/") + "/task";
+
+    @GetMapping("/task/{taskId}")
+    public String greeting(@PathVariable String taskId, Model model) {
+        model.addAttribute("taskTitle", "Hello Word!");
+        return "task";
     }
 
     @RequestMapping(value = "/task/code")

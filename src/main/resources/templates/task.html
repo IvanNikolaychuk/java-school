@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
 <body>
     <div id="task-section">
         <div class="title">
-            <div class="task-title">Hello Word</div>
+            <div class="task-title" th:text="${taskTitle}"></div>
             <div class="run-code">
                 <div id="run-code-icon" class="icon"></div>Run code
             </div>
