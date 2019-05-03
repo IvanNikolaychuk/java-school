@@ -1,4 +1,4 @@
-package com.school.domain.code.rest;
+package com.school.domain.code.task;
 
 public class Class {
     private final String code;

@@ -107,14 +107,20 @@ padding 1%
     height: 90%;
 }
 
-.task-condition {
-    text-align: center;
+.task-conditions {
+    padding-top: 2%;
     float: left;
     border-right: 5px solid #DADBDA;
     border-left: 5px solid #DADBDA;
     border-bottom: 5px solid #DADBDA;
     width: 25%;
     height: 93%;
+}
+
+.task-conditions .condition {
+    padding-top: 5%;
+    padding-left: 10%;
+    display: block !important;
 }
 
 .program-section {

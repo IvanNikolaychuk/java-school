@@ -7,7 +7,7 @@ $(document).ready(function() {
             data: {
                 code: ace.edit("code-editor").getValue(),
                 programInput: $('#task-section .input-section textarea').val(),
-                taskId: 'taskId'
+                taskId: getTaskId()
             }
         }).done(function(response) {
             handleResponse(JSON.parse(response));
@@ -35,5 +35,11 @@ $(document).ready(function() {
         }
 
         return summary
+    }
+
+    function getTaskId() {
+        var href = window.location.href;
+        var relativePath = href.lastIndexOf('task/');
+        return href.substr(relativePath).replace('task/', '');
     }
 });

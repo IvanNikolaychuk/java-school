@@ -13,7 +13,6 @@
 
     <script src="../../../../../scripts/jquery.js"></script>
     <script src="../../../../../scripts/code-sender.js"></script>
-    <script src="../../../../../scripts/code-loader.js"></script>
 
     <script src="../../../../../external/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../../../../external/ace/src-noconflict/ext-language_tools.js"></script>
@@ -25,7 +24,7 @@
 <body>
     <div id="task-section">
         <div class="title">
-            <div class="task-title" th:text="${taskTitle}"></div>
+            <div class="task-title" th:text="${task.title}"></div>
             <div class="run-code">
                 <div id="run-code-icon" class="icon"></div>Run code
             </div>
@@ -40,10 +39,14 @@
             <div class="class-name"></div>
         </div>
         <div class="task">
-            <div class="task-condition">Here is a description of the task</div>
+            <div class="task-conditions">
+                <div th:each="condition :  ${task.conditions}" th:text="'•  ' + ${condition}" class="condition">
+
+                </div>
+            </div>
 
             <div class="program-section">
-                <div id="code-editor"></div>
+                <div id="code-editor" th:text="${task.classes[0].code}"></div>
                 <div class="input-section">
                     <textarea placeholder="Here is input"></textarea>
                 </div>
