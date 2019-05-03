@@ -1,12 +1,22 @@
 package com.school.domain.code.task;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity(name = "tasks")
 public class Task {
+    @Id
     private String id;
     private String title;
+
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Class.class, mappedBy = "taskId")
     private List<Class> classes;
+
+    @ElementCollection
+    @CollectionTable(name="conditions", joinColumns=@JoinColumn(name="task_id"))
     private List<String> conditions;
+
+    public Task() {}
 
     Task(String id,
          String title,
