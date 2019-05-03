@@ -24,7 +24,7 @@ public class CompilationResult {
     public List<String> toProblems() {
         return diagnostics.getDiagnostics()
                 .stream()
-                .map(diagnostic -> diagnostic.toString().replace(aClass.getRootDir() + File.separator, ""))
+                .map(diagnostic -> diagnostic.toString().replace(aClass.getEnvironment().getRootDir() + File.separator, ""))
                 .collect(Collectors.toList());
     }
 }

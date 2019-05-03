@@ -1,23 +1,23 @@
 package com.school.domain.code.program.javaclass;
 
+import com.school.domain.code.program.Environment;
+
 public class ValidJavaClass implements Class {
-    private String rootDir;
-    private String taskId;
+    private Environment environment;
     private Package classPackage;
 
     private String name;
     private String code;
 
-    private ValidJavaClass(String rootDir, String taskId, Package classPackage, String name, String code) {
-        this.rootDir = rootDir;
-        this.taskId = taskId;
+    private ValidJavaClass(Environment environment, Package classPackage, String name, String code) {
+        this.environment = environment;
         this.classPackage = classPackage;
         this.name = name;
         this.code = code;
     }
 
-    public String getDirectory(String separator) {
-        return rootDir + separator + taskId ;
+    public String getDirectory() {
+        return environment.getRootDir();
     }
 
     public String getPackages(String separator) {
@@ -30,7 +30,7 @@ public class ValidJavaClass implements Class {
 
     @Override
     public String getFullPathWithExtension(String separator) {
-        return getDirectory(separator) + separator + getRelativePathWithoutExtension(separator) + ".java";
+        return getDirectory() + separator + getRelativePathWithoutExtension(separator) + ".java";
     }
 
     public String getName() {
@@ -43,18 +43,12 @@ public class ValidJavaClass implements Class {
     }
 
     @Override
-    public String getRootDir() {
-        return rootDir;
-    }
-
-    @Override
-    public String getTaskId() {
-        return taskId;
+    public Environment getEnvironment() {
+        return environment;
     }
 
     public static final class JavaClassBuilder {
-        private String rootDir;
-        private String taskId;
+        private Environment environment;
         private String code;
         private Package classPackage;
         private String name;
@@ -66,13 +60,8 @@ public class ValidJavaClass implements Class {
             return new JavaClassBuilder();
         }
 
-        public JavaClassBuilder withRootDir(String rootDir) {
-            this.rootDir = rootDir;
-            return this;
-        }
-
-        public JavaClassBuilder withTaskId(String taskId) {
-            this.taskId = taskId;
+        public JavaClassBuilder withEnviroment(Environment environment) {
+            this.environment = environment;
             return this;
         }
 
@@ -92,7 +81,7 @@ public class ValidJavaClass implements Class {
         }
 
         public ValidJavaClass build() {
-            return new ValidJavaClass(rootDir, taskId, classPackage, name, code);
+            return new ValidJavaClass(environment, classPackage, name, code);
         }
     }
 }

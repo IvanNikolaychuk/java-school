@@ -3,7 +3,6 @@ package com.school.domain.code.program.runner;
 import com.school.domain.code.program.compiler.JavaClassCompiler;
 import com.school.domain.code.program.javaclass.ValidJavaClass;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -27,7 +26,7 @@ public class JavaMainMethodRunner {
 
     private URLClassLoader aClassLoaderFor(ValidJavaClass validJavaClass) throws MalformedURLException {
         ClassLoader classLoader = JavaMainMethodRunner.class.getClassLoader();
-        return new URLClassLoader(new URL[]{Paths.get(validJavaClass.getDirectory(File.separator)).toUri().toURL()}, classLoader);
+        return new URLClassLoader(new URL[]{Paths.get(validJavaClass.getDirectory()).toUri().toURL()}, classLoader);
     }
 
     private Object[] emptyArgs() {

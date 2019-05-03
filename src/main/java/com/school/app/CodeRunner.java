@@ -1,23 +1,19 @@
 package com.school.app;
 
-import com.school.domain.code.program.Program;
-import com.school.domain.code.program.ProgramExecutionResult;
-import com.school.domain.code.program.ProgramExecutor;
-import com.school.domain.code.program.ProgramFactory;
+import com.school.domain.code.program.*;
+import com.school.domain.code.program.javaclass.PotentialJavaClass;
 
 public class CodeRunner {
-    private final String rootDir;
-    private final ProgramFactory programFactory;
+    private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + "academy";
     private final ProgramExecutor programExecutor;
 
-    public CodeRunner(String rootDir) {
-        this.programExecutor = new ProgramExecutor(rootDir);
-        this.programFactory = new ProgramFactory();
-        this.rootDir = rootDir;
+    public CodeRunner() {
+        this.programExecutor = new ProgramExecutor();
     }
 
-    public ProgramExecutionResult run(String taskId, String code, String programInput) throws Exception {
-        Program program = programFactory.create(rootDir, taskId, code, programInput);
+    public ProgramExecutionResult run(String code, String programInput) throws Exception {
+        Environment environment = new Environment(ROOT_DIR_PATH);
+        Program program = new Program(environment, new PotentialJavaClass(environment, code), programInput);
 
         return programExecutor.execute(program);
     }

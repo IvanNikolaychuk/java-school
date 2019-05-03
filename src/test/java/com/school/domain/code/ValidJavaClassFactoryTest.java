@@ -1,5 +1,6 @@
 package com.school.domain.code;
 
+import com.school.domain.code.program.Environment;
 import com.school.domain.code.program.javaclass.ValidJavaClass;
 import com.school.domain.code.program.javaclass.JavaClassFactory;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class ValidJavaClassFactoryTest {
     public void shouldCreateCorrectJavaClassRepresentation() {
         JavaClassFactory factory = new JavaClassFactory();
 
-        ValidJavaClass result = factory.create("rootDir","taskId", classContent);
+        ValidJavaClass result = factory.create(new Environment("rootDir"), classContent);
 
         assertEquals(result.getPackages("."), CLASS_PACKAGE);
         assertEquals(result.getName(), CLASS_NAME);

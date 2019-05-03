@@ -15,20 +15,18 @@ import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 public class CodeSectionController {
-    private static final String ROOT_DIR_PATH = System.getProperty("java.io.tmpdir") + "academy";
 
     private final CodeRunner codeRunner;
 
     public CodeSectionController() {
-        this.codeRunner = new CodeRunner(ROOT_DIR_PATH);
+        this.codeRunner = new CodeRunner();
     }
 
     @RequestMapping(value = "/runCode", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<String> run(@RequestParam String code,
-                                                     @RequestParam String taskId,
                                                      @RequestParam(required = false, defaultValue = "") String programInput) {
         try {
-            ProgramExecutionResult result = codeRunner.run(taskId, code, programInput);
+            ProgramExecutionResult result = codeRunner.run(code, programInput);
             return new ResponseEntity<>(new JSONObject(result).toString(), OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Ooops, something is wrong :(", INTERNAL_SERVER_ERROR);

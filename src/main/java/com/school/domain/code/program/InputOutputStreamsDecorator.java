@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 import static com.github.javaparser.StaticJavaParser.parseStatement;
 
 public class InputOutputStreamsDecorator {
-    public String decorate(String rootDir, String taskId, String content) {
+    public String decorate(Environment environment, String code) {
         CompilationUnit compilationUnit = new JavaParser()
-                .parse(content)
+                .parse(code)
                 .getResult()
                 .get();
 
@@ -32,7 +32,7 @@ public class InputOutputStreamsDecorator {
                 MethodDeclaration mainMethod = (MethodDeclaration) node;
                 Optional<BlockStmt> oldBlock = mainMethod.getBody();
                 if (oldBlock.isPresent()) {
-                    BlockStmt newBlock = decorate(rootDir, taskId, oldBlock.get());
+                    BlockStmt newBlock = decorate(environment, oldBlock.get());
                     mainMethod.replace(oldBlock.get(), newBlock);
                     mainMethod.addThrownException(Exception.class);
                     compilationUnit.addImport(PrintStream.class);
@@ -45,18 +45,16 @@ public class InputOutputStreamsDecorator {
             return compilationUnit.toString();
         }
 
-        return content;
+        return code;
     }
 
-    private BlockStmt decorate(String rootDir, String taskId, BlockStmt body) {
-        InputOutputHelper inputOutputHelper = new InputOutputHelper(rootDir);
-        String fullPathToOutput = inputOutputHelper.fullPathToOutput(taskId);
-        String fullPathToInput = inputOutputHelper.fullPathToInput(taskId);
+    private BlockStmt decorate(Environment environment, BlockStmt body) {
+        InputOutputHelper inputOutputHelper = new InputOutputHelper();
 
         return new BlockStmt().addStatement(parseStatement(
                 "try (\n" +
-                        "PrintStream out = new PrintStream(new File(\"" + normalize(fullPathToOutput) + "\"));\n" +
-                        "InputStream in = new FileInputStream(new File(\"" + normalize(fullPathToInput) + "\"))){\n" +
+                        "PrintStream out = new PrintStream(new File(\"" + normalize(environment.fullPathToOutput()) + "\"));\n" +
+                        "InputStream in = new FileInputStream(new File(\"" + normalize(environment.fullPathToInput()) + "\"))){\n" +
                         "System.setIn(in);\n" +
                         "System.setOut(out);\n" +
                         toString(body.getStatements()) +

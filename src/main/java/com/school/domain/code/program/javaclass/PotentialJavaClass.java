@@ -1,22 +1,23 @@
 package com.school.domain.code.program.javaclass;
 
+import com.school.domain.code.program.Environment;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PotentialJavaClass implements Class {
-    private final String rootDir;
-    private final String taskId;
+    private final Environment environment;
     private final String code;
 
-    public PotentialJavaClass(String rootDir, String taskId, String code) {
-        this.rootDir = rootDir;
-        this.taskId = taskId;
+    public PotentialJavaClass(Environment environment, String code) {
+        this.environment = environment;
         this.code = code;
     }
 
+    // TODO: Package is not included here. Would be good to have it.
     @Override
     public String getFullPathWithExtension(String separator) {
-        return rootDir + separator + taskId + separator + getName() + ".java";
+        return environment.getRootDir() + separator + getName() + ".java";
     }
 
     // TODO: hide this into factory and re-validate
@@ -33,12 +34,7 @@ public class PotentialJavaClass implements Class {
     }
 
     @Override
-    public String getRootDir() {
-        return rootDir;
-    }
-
-    @Override
-    public String getTaskId() {
-        return taskId;
+    public Environment getEnvironment() {
+        return environment;
     }
 }

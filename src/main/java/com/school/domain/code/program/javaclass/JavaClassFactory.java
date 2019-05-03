@@ -4,6 +4,7 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.PackageDeclaration;
+import com.school.domain.code.program.Environment;
 import com.school.domain.code.program.InputOutputStreamsDecorator;
 
 import java.util.Optional;
@@ -15,18 +16,17 @@ public class JavaClassFactory {
         inputOutputStreamsDecorator = new InputOutputStreamsDecorator();
     }
 
-    public ValidJavaClass create(String rootDir, String taskId, String code) {
+    public ValidJavaClass create(Environment environment, String code) {
         ParseResult<CompilationUnit> result = new JavaParser().parse(code);
         if (!result.getResult().isPresent()) throw new IllegalArgumentException("Can not parse java file");
 
         String packageName = extractPackageName(result.getResult().get());
         String className = extractClassName(result.getResult().get());
 
-        String decoratedCode = inputOutputStreamsDecorator.decorate(rootDir, taskId, code);
+        String decoratedCode = inputOutputStreamsDecorator.decorate(environment, code);
 
         return ValidJavaClass.JavaClassBuilder.aJavaClass()
-                .withRootDir(rootDir)
-                .withTaskId(taskId)
+                .withEnviroment(environment)
                 .withClassPackage(aPackage(packageName))
                 .withName(className)
                 .withCode(decoratedCode)

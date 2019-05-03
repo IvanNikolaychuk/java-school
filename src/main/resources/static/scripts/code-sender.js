@@ -6,8 +6,7 @@ $(document).ready(function() {
             type:'post',
             data: {
                 code: ace.edit("code-editor").getValue(),
-                programInput: $('#task-section .input-section textarea').val(),
-                taskId: getTaskId()
+                programInput: $('#task-section .input-section textarea').val()
             }
         }).done(function(response) {
             handleResponse(JSON.parse(response));

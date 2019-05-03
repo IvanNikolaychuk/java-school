@@ -18,9 +18,9 @@ public class ProgramExecutor {
     private final JavaClassFactory javaClassFactory;
 
 
-    public ProgramExecutor(String rootDirPath) {
+    public ProgramExecutor() {
         this.javaClassRunner = new JavaMainMethodRunner();
-        this.inputOutputHelper = new InputOutputHelper(rootDirPath);
+        this.inputOutputHelper = new InputOutputHelper();
         this.javaClassCompiler = new JavaClassCompiler();
         this.javaClassFactory = new JavaClassFactory();
     }
@@ -34,12 +34,11 @@ public class ProgramExecutor {
         inputOutputHelper.createInputOutputFiles(program);
         javaClassRunner.runMainMethod(toValidClass(program.getPotentialClass()));
 
-        return withPassedCompilation(inputOutputHelper.readOutputContent(program));
+        return withPassedCompilation(inputOutputHelper.readOutputContent(program.getEnvironment()));
     }
 
     private ValidJavaClass toValidClass(PotentialJavaClass potentialJavaClass) {
-        return javaClassFactory.create(potentialJavaClass.getRootDir(),
-                potentialJavaClass.getTaskId(),
+        return javaClassFactory.create(potentialJavaClass.getEnvironment(),
                 potentialJavaClass.getCode());
     }
 }

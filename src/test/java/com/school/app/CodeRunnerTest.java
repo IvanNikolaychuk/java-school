@@ -6,15 +6,16 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.UUID;
 
 public class CodeRunnerTest {
-    private CodeRunner codeRunner = new CodeRunner(System.getProperty("java.io.tmpdir") + "academy");
+    private CodeRunner codeRunner = new CodeRunner();
 
     @Test
     public void shouldRunCodeWithoutInput() throws Exception {
         String text = "Hello";
 
-        ProgramExecutionResult result = codeRunner.run(RandomString.generate(), codeWithoutScanner(text), "");
+        ProgramExecutionResult result = codeRunner.run(codeWithoutScanner(text), "");
 
         Assert.assertEquals(result.getOutput(), text);
     }
@@ -24,27 +25,25 @@ public class CodeRunnerTest {
         String text = "Hello";
         String input = "Ivan";
 
-        ProgramExecutionResult result = codeRunner.run(RandomString.generate(), codeWithScanner(text), input);
+        ProgramExecutionResult result = codeRunner.run(codeWithScanner(text), input);
 
         Assert.assertEquals(result.getOutput(), text + input);
     }
 
     @Test
     public void shouldRunCodeThatIsNotCompiling() throws Exception {
-        String packageName = RandomString.generate();
-
-        ProgramExecutionResult result = codeRunner.run(packageName, codeNotCompiling(packageName), "");
+        ProgramExecutionResult result = codeRunner.run(codeNotCompiling(), "");
 
         Assert.assertEquals(result.getOutput(), "");
         Assert.assertEquals(result.getCompilation().getProblems(), Collections.singletonList(
-                packageName + "\\Test.java:5: error: ';' expected\n" +
+                "Test.java:5: error: ';' expected\n" +
                         "\t\tSystem.out.print(\"Hello\")\n" +
                         "\t\t                         ^"
         ));
     }
 
-    private String codeNotCompiling(String packageName) {
-        return "package " + packageName + ";\n" +
+    private String codeNotCompiling() {
+        return "package " + RandomString.generate() + ";\n" +
                 "\n" +
                 "public class Test {\n" +
                 "\tpublic static void main(String[] args) {\n" +
