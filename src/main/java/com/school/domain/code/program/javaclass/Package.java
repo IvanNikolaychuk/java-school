@@ -1,4 +1,4 @@
-package com.school.domain.code.javaclass;
+package com.school.domain.code.program.javaclass;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.school.domain.code.program;
 
-import com.school.domain.code.javaclass.PotentialJavaClass;
+import com.school.domain.code.program.javaclass.PotentialJavaClass;
 
 public class ProgramFactory {
     public Program create(String rootDir, String taskId, String content, String programInput) {

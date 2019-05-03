@@ -1,4 +1,4 @@
-package com.school.domain.code.javaclass;
+package com.school.domain.code.program.javaclass;
 
 public class ValidJavaClass implements Class {
     private String rootDir;

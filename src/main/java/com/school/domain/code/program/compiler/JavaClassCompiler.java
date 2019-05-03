@@ -1,7 +1,7 @@
-package com.school.domain.code.compiler;
+package com.school.domain.code.program.compiler;
 
 import com.school.domain.code.file.FileFactory;
-import com.school.domain.code.javaclass.Class;
+import com.school.domain.code.program.javaclass.Class;
 
 import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;

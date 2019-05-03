@@ -1,12 +1,12 @@
 package com.school.domain.code.program;
 
-import com.school.domain.code.compiler.CompilationResult;
-import com.school.domain.code.compiler.JavaClassCompiler;
+import com.school.domain.code.program.compiler.CompilationResult;
+import com.school.domain.code.program.compiler.JavaClassCompiler;
 import com.school.domain.code.file.InputOutputHelper;
-import com.school.domain.code.javaclass.JavaClassFactory;
-import com.school.domain.code.javaclass.PotentialJavaClass;
-import com.school.domain.code.javaclass.ValidJavaClass;
-import com.school.domain.code.runner.JavaMainMethodRunner;
+import com.school.domain.code.program.javaclass.JavaClassFactory;
+import com.school.domain.code.program.javaclass.PotentialJavaClass;
+import com.school.domain.code.program.javaclass.ValidJavaClass;
+import com.school.domain.code.program.runner.JavaMainMethodRunner;
 
 import static com.school.domain.code.program.ProgramExecutionResult.withFailedCompilation;
 import static com.school.domain.code.program.ProgramExecutionResult.withPassedCompilation;

@@ -1,4 +1,4 @@
-package com.school.domain.code.javaclass;
+package com.school.domain.code.program.javaclass;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;

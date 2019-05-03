@@ -24,7 +24,7 @@ public class CodeSectionController {
     }
 
     @RequestMapping(value = "/runCode", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<String> test(@RequestParam String code,
+    public @ResponseBody ResponseEntity<String> run(@RequestParam String code,
                                                      @RequestParam String taskId,
                                                      @RequestParam(required = false, defaultValue = "") String programInput) {
         try {

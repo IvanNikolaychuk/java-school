@@ -1,4 +1,4 @@
-package com.school.domain.code.javaclass;
+package com.school.domain.code.program.javaclass;
 
 public interface Class {
     String getRootDir();

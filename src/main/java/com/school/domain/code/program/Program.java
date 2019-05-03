@@ -1,7 +1,6 @@
 package com.school.domain.code.program;
 
-import com.school.domain.code.javaclass.Class;
-import com.school.domain.code.javaclass.PotentialJavaClass;
+import com.school.domain.code.program.javaclass.PotentialJavaClass;
 
 import java.util.Optional;
 

@@ -1,10 +1,7 @@
-package com.school.domain.code.runner;
+package com.school.domain.code.program.runner;
 
-import com.school.domain.code.compiler.JavaClassCompiler;
-import com.school.domain.code.javaclass.Class;
-import com.school.domain.code.javaclass.JavaClassFactory;
-import com.school.domain.code.javaclass.PotentialJavaClass;
-import com.school.domain.code.javaclass.ValidJavaClass;
+import com.school.domain.code.program.compiler.JavaClassCompiler;
+import com.school.domain.code.program.javaclass.ValidJavaClass;
 
 import java.io.File;
 import java.net.MalformedURLException;
