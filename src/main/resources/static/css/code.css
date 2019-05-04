@@ -79,7 +79,6 @@ padding 1%
 
 .status {
     height: 7%;
-    /*background: #ce2b2bb8;*/
     width: 100%;
     color: #fff;
     font-weight: 500;
@@ -147,7 +146,7 @@ padding 1%
     width: 100%;
     border-bottom: 5px solid #DADBDA;
     border-right: 5px solid #DADBDA;
-    height: 70%;
+    height: 77%;
     /* todo: this is a hack, but i don't know where this margin is comming from... */
     margin-bottom: -6px;
 }

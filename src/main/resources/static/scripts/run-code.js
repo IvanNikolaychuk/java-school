@@ -15,23 +15,12 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
-        if (response.compilation.problems.length > 0) {
-            $("#task-section .output-section").hide();
-            $("#task-section .compilation-error").show();
-            $("#task-section .compilation-error textarea").text(problemSummary(response.compilation.problems));
+        if (hasCompilationErrors(response)) {
+            showCompilationErrors(response);
         } else {
             $("#task-section .compilation-error").hide();
             $("#task-section .output-section").show();
             $("#task-section .output-section textarea").text(response.output);
         }
-    }
-
-    function problemSummary(problems) {
-        var summary = 'Problems:\n';
-        for (var i = 0; i < problems.length; i++) {
-            summary += (i + 1) + '. ' + problems[i];
-        }
-
-        return summary
     }
 });
