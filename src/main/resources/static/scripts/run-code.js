@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $("#task-section .run-code").click(function() {
+        hideStatus();
+
         $.ajax({
             url:'/runCode',
             type:'post',
@@ -18,7 +20,7 @@ $(document).ready(function() {
         if (hasCompilationErrors(response)) {
             showCompilationErrors(response);
         } else {
-            $("#task-section .compilation-error").hide();
+            hideCompilationErrorSection();
             $("#task-section .output-section").show();
             $("#task-section .output-section textarea").text(response.output);
         }

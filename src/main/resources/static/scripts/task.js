@@ -1,4 +1,18 @@
 $(document).ready(function() {
-    $("#task-section .program-section .status").hide();
-    $("#task-section .compilation-error").hide();
+    hideStatus();
+    hideCompilationErrorSection();
 });
+
+function getStatus() {
+    return $("#task-section .program-section .status");
+}
+
+function showStatus() {
+    $("#code-editor").css("height", "70%");
+    getStatus().show();
+}
+
+function hideStatus() {
+    $("#code-editor").css("height", "77%");
+    getStatus().hide();
+}

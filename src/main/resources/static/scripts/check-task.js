@@ -14,19 +14,19 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
-        var $status = $("#task-section .program-section .status");
-        $status.show();
         if (response.result) {
-            $status.css("background", "#3dce2bb3");
-            $status.text('All check passed. Great job!');
+            getStatus().css("background", "#3dce2bb3");
+            getStatus().text('All check passed. Great job!');
         } else if (hasCompilationErrors(response.executionResult)) {
             showCompilationErrors(response.executionResult);
-            $status.css("background", "#b98b09b8");
-            $status.text('There is a compilation error.');
+            getStatus().css("background", "#b98b09b8");
+            getStatus().text('There is a compilation error.');
         } else {
-            $status.css("background", "#ce2b2bb8");
-            $status.text('Program compiled, but some checks failed. Please try one more time.');
+            getStatus().css("background", "#ce2b2bb8");
+            getStatus().text('Program compiled, but some checks failed. Please try one more time.');
         }
+
+        showStatus();
     }
 
     function getTaskId() {

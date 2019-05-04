@@ -8,6 +8,10 @@ function showCompilationErrors(executionResult) {
     $("#task-section .compilation-error textarea").text(compilationErrorsSummary(executionResult));
 }
 
+function hideCompilationErrorSection() {
+    $("#task-section .compilation-error").hide()
+}
+
 function compilationErrorsSummary(executionResult) {
     var problems = executionResult.compilation.problems;
 
