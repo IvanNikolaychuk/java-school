@@ -1,6 +1,6 @@
 package com.school.domain.code.task;
 
-import com.school.domain.code.task.verification.Specification;
+import com.school.domain.code.task.verification.Test;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -17,22 +17,22 @@ public class Requirement {
     private String taskId;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Specification.class, mappedBy = "requirementId")
-    private List<Specification> specifications;
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Test.class, mappedBy = "requirementId")
+    private List<Test> tests;
 
     public Requirement() {}
 
-    public Requirement(String name, Specification ...specifications) {
+    public Requirement(String name, Test... tests) {
         this.name = name;
-        this.specifications = Arrays.asList(specifications);
+        this.tests = Arrays.asList(tests);
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Specification> getSpecifications() {
-        return specifications;
+    public List<Test> getTests() {
+        return tests;
     }
 
     public String getTaskId() {

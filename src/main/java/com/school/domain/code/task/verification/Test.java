@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "specification")
-public class Specification {
+@Entity(name = "test")
+public class Test {
     @Id
     @GeneratedValue
     private String id;
@@ -14,9 +14,9 @@ public class Specification {
     private String programInput;
     private String expectedOutput;
 
-    public Specification() {}
+    public Test() {}
 
-    public Specification(String requirementId, String programInput, String expectedOutput) {
+    public Test(String requirementId, String programInput, String expectedOutput) {
         this.requirementId = requirementId;
         this.programInput = programInput;
         this.expectedOutput = expectedOutput;

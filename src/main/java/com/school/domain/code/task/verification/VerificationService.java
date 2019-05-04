@@ -22,12 +22,12 @@ public class VerificationService {
         Compilation compilationExample = Compilation.noCompilationErrors();
         for (Requirement requirement : task.getRequirements()) {
             VerificationResult status = PASSED;
-            for (Specification specification : requirement.getSpecifications()) {
-                ExecutionResult executionResult = codeRunner.run(code, specification.getProgramInput());
+            for (Test test : requirement.getTests()) {
+                ExecutionResult executionResult = codeRunner.run(code, test.getProgramInput());
                 if (executionResult.hasCompilationFailed()) {
                     compilationExample = executionResult.getCompilation();
                     status = NOT_COMPILED;
-                } else if (!executionResult.getOutput().equals(specification.getExpectedOutput())) {
+                } else if (!executionResult.getOutput().equals(test.getExpectedOutput())) {
                     status = FAILED;
                 }
             }

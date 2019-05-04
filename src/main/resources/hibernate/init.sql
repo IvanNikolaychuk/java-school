@@ -10,6 +10,6 @@ public class Main {
 
   }
 }');
-insert into specification(id, expectedOutput, programInput, requirementId) value ('1', 'Hello World', '', '2');
+insert into test(id, expectedOutput, programInput, requirementId) value ('1', 'Hello World', '', '2');
 commit;
 

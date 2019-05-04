@@ -3,7 +3,6 @@ package com.school.domain.code.task.verification;
 import com.school.domain.code.task.Requirement;
 import com.school.domain.code.task.Task;
 import org.junit.Assert;
-import org.junit.Test;
 
 import static com.google.common.collect.Sets.newHashSet;
 import static com.school.domain.code.task.verification.VerificationResult.*;
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertFalse;
 
 public class VerificationServiceTest {
 
-    @Test
+    @org.junit.Test
     public void shouldVerifyProgramThatPasses() throws Exception {
         Requirement requirement = shouldPrintText("Hello world");
         Task task = new Task("Title", newHashSet(requirement));
@@ -27,7 +26,7 @@ public class VerificationServiceTest {
         assertEquals(result.getResults().get(requirement.getName()), PASSED);
     }
 
-    @Test
+    @org.junit.Test
     public void shouldVerifyProgramThatFails() throws Exception {
         Requirement printRequirement = shouldPrintText("Hello World");
         Requirement noRequirement = new Requirement("No Requirement");
@@ -41,7 +40,7 @@ public class VerificationServiceTest {
         assertEquals(result.getResults().get(noRequirement.getName()), PASSED);
     }
 
-    @Test
+    @org.junit.Test
     public void shouldRunCodeThatIsNotCompiling() throws Exception {
         Requirement requirement = shouldPrintText("Hello World");
         Task task = new Task("Title", newHashSet(requirement));
@@ -54,7 +53,7 @@ public class VerificationServiceTest {
     }
 
     private Requirement shouldPrintText(String text) {
-        Specification specification = new Specification("requirementId", "", text);
-        return new Requirement("Should print text", specification);
+        Test test = new Test("requirementId", "", text);
+        return new Requirement("Should print text", test);
     }
 }
