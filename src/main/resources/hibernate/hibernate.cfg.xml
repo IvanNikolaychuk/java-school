@@ -15,9 +15,11 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="connection.pool_size">20</property>
 
         <mapping class="com.school.domain.code.task.Task"/>
         <mapping class="com.school.domain.code.task.Class"/>
+        <mapping class="com.school.domain.code.task.Verification"/>
 
     </session-factory>
 </hibernate-configuration>

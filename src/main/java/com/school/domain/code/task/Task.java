@@ -2,6 +2,7 @@ package com.school.domain.code.task;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "tasks")
 public class Task {
@@ -14,19 +15,13 @@ public class Task {
 
     @ElementCollection
     @CollectionTable(name="conditions", joinColumns=@JoinColumn(name="task_id"))
+    // TODO: should be complex object and have id
     private List<String> conditions;
 
-    public Task() {}
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Verification.class, mappedBy = "taskId")
+    private Set<Verification> verifications;
 
-    Task(String id,
-         String title,
-         List<Class> classes,
-         List<String> conditions) {
-        this.id = id;
-        this.title = title;
-        this.classes = classes;
-        this.conditions = conditions;
-    }
+    public Task() {}
 
     public String getId() {
         return id;
@@ -42,5 +37,9 @@ public class Task {
 
     public List<String> getConditions() {
         return conditions;
+    }
+
+    public Set<Verification> getVerifications() {
+        return verifications;
     }
 }

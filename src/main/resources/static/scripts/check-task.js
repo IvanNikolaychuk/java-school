@@ -1,12 +1,10 @@
 $(document).ready(function() {
-    $("#task-section .compilation-error").hide();
-    $("#task-section .run-code").click(function() {
+    $("#task-section .check-task").click(function() {
         $.ajax({
-            url:'/runCode',
+            url:'/task/verify/' + getTaskId(),
             type:'post',
             data: {
-                code: ace.edit("code-editor").getValue(),
-                programInput: $('#task-section .input-section textarea').val()
+                code: ace.edit("code-editor").getValue()
             }
         }).done(function(response) {
             handleResponse(JSON.parse(response));
@@ -16,17 +14,23 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
-        if (response.compilation.problems.length > 0) {
+        var $status = $("#task-section .program-section .status");
+        $status.show();
+        if (response.result) {
+            $status.css("background", "#3dce2bb3");
+            $status.text('All check passed. Great job!');
+        } else if (response.executionResult.compilation.problems.length > 0) {
             $("#task-section .output-section").hide();
             $("#task-section .compilation-error").show();
-            $("#task-section .compilation-error textarea").text(problemSummary(response.compilation.problems));
+            $("#task-section .compilation-error textarea").text(problemSummary(response.executionResult.compilation.problems));
+            $status.css("background", "#b98b09b8");
+            $status.text('There is a compilation error.');
         } else {
-            $("#task-section .compilation-error").hide();
-            $("#task-section .output-section").show();
-            $("#task-section .output-section textarea").text(response.output);
+            $status.css("background", "#ce2b2bb8");
+            $status.text('Program compiled, but some checks failed. Please try one more time.');
         }
     }
-
+    //
     function problemSummary(problems) {
         var summary = 'Problems:\n';
         for (var i = 0; i < problems.length; i++) {

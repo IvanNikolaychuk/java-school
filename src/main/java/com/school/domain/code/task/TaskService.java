@@ -5,7 +5,7 @@ import com.school.domain.code.task.repository.TaskRepository;
 public class TaskService {
     private final TaskRepository taskRepository = new TaskRepository();
 
-    public Task load(String taskId) {
+    public Task get(String taskId) {
         return taskRepository.get(taskId);
     }
 }
