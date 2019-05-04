@@ -18,8 +18,8 @@ public class Task {
     // TODO: should be complex object and have id
     private List<String> conditions;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Verification.class, mappedBy = "taskId")
-    private Set<Verification> verifications;
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Specification.class, mappedBy = "taskId")
+    private Set<Specification> specifications;
 
     public Task() {}
 
@@ -39,7 +39,7 @@ public class Task {
         return conditions;
     }
 
-    public Set<Verification> getVerifications() {
-        return verifications;
+    public Set<Specification> getSpecifications() {
+        return specifications;
     }
 }

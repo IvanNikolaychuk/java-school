@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "verification")
-public class Verification {
+@Entity(name = "specification")
+public class Specification {
     @Id
     @GeneratedValue
     private String id;
@@ -15,7 +15,7 @@ public class Verification {
     private String programInput;
     private String expectedOutput;
 
-    public Verification() {}
+    public Specification() {}
 
     public String getConditionId() {
         return conditionId;

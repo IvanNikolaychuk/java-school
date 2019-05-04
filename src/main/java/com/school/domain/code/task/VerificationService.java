@@ -7,9 +7,9 @@ public class VerificationService {
     private final CodeRunner codeRunner = new CodeRunner();
 
     public VerificationResult verify(Task task, String code) throws Exception {
-        for (Verification verification : task.getVerifications()) {
-            String programInput = verification.getProgramInput();
-            String expectedOutput = verification.getExpectedOutput();
+        for (Specification specification : task.getSpecifications()) {
+            String programInput = specification.getProgramInput();
+            String expectedOutput = specification.getExpectedOutput();
 
             ExecutionResult executionResult = codeRunner.run(code, programInput);
             if (!executionResult.getOutput().equals(expectedOutput)) {
