@@ -17,8 +17,8 @@ $(document).ready(function() {
         if (response.passed) {
             getStatus().css("background", "#3dce2bb3");
             getStatus().text('All check passed. Great job!');
-        } else if (hasCompilationErrors(response.executionResult)) {
-            showCompilationErrors(response.executionResult);
+        } else if (hasCompilationErrors(response.compilation)) {
+            showCompilationErrors(response.compilation);
             getStatus().css("background", "#b98b09b8");
             getStatus().text('There is a compilation error.');
         } else {

@@ -10,7 +10,7 @@ public class Compilation {
         this.problems = problems;
     }
 
-    static Compilation noCompilationErrors() {
+    public static Compilation noCompilationErrors() {
         return new Compilation(new ArrayList<>());
     }
 

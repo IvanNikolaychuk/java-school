@@ -1,41 +1,37 @@
 package com.school.domain.code.task.verification;
 
-import com.school.domain.code.program.ExecutionResult;
+import com.school.domain.code.program.Compilation;
+
+import java.util.Map;
 
 public class VerificationResult {
     private final boolean passed;
-    private final ExecutionResult executionResult;
-    private final String programInput;
-    private final String expectedOutput;
+    private final Compilation compilation;
+    private Map<String, VerificationStatus> results;
 
-    private VerificationResult(boolean passed, ExecutionResult executionResult, String programInput, String expectedOutput) {
+    private VerificationResult(boolean passed, Compilation compilation, Map<String, VerificationStatus> results) {
         this.passed = passed;
-        this.executionResult = executionResult;
-        this.programInput = programInput;
-        this.expectedOutput = expectedOutput;
+        this.compilation = compilation;
+        this.results = results;
     }
 
-    public static VerificationResult ok() {
-        return new VerificationResult(true, null, null, null);
+    public static VerificationResult ok(Map<String, VerificationStatus> results) {
+        return new VerificationResult(true, Compilation.noCompilationErrors(), results);
     }
 
-    public static VerificationResult failure(ExecutionResult executionResult, String programInput, String expectedOutput) {
-        return new VerificationResult(false, executionResult, programInput, expectedOutput);
+    public static VerificationResult failure(Map<String, VerificationStatus> results, Compilation compilation) {
+        return new VerificationResult(false, compilation, results);
     }
 
     public boolean isPassed() {
         return passed;
     }
 
-    public ExecutionResult getExecutionResult() {
-        return executionResult;
+    public Compilation getCompilation() {
+        return compilation;
     }
 
-    public String getProgramInput() {
-        return programInput;
-    }
-
-    public String getExpectedOutput() {
-        return expectedOutput;
+    public Map<String, VerificationStatus> getResults() {
+        return results;
     }
 }

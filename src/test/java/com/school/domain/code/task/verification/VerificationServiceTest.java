@@ -5,51 +5,56 @@ import com.school.domain.code.task.Task;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Sets.newHashSet;
+import static com.school.domain.code.task.verification.VerificationStatus.*;
 import static com.school.utils.CodeTemplates.codeNotCompiling;
 import static com.school.utils.CodeTemplates.codePrinting;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class VerificationServiceTest {
-    private static final String TASK_ID = "taskId";
 
     @Test
     public void shouldVerifyProgramThatPasses() throws Exception {
-        String expectedOutput = "Hello world";
-        Requirement requirement = new Requirement(TASK_ID, "Should print Hello World", of(shouldPrintSpecification(expectedOutput)));
+        Requirement requirement = shouldPrintText("Hello world");
         Task task = new Task("Title", newHashSet(requirement));
 
-        VerificationResult result = new VerificationService().verify(task, codePrinting(expectedOutput));
+        VerificationResult result = new VerificationService().verify(task, codePrinting("Hello world"));
+
         Assert.assertTrue(result.isPassed());
-        Assert.assertNull(result.getExecutionResult());
+        Assert.assertNotNull(result.getCompilation());
+        Assert.assertTrue(result.getCompilation().getProblems().isEmpty());
+        assertEquals(result.getResults().get(requirement.getName()), PASSED);
     }
 
     @Test
     public void shouldVerifyProgramThatFails() throws Exception {
-        Requirement requirement = new Requirement(TASK_ID, "Should print Hello World", Arrays.asList(shouldPrintSpecification("Hello world")));
-
-        Task task = new Task("Title", newHashSet(requirement));
+        Requirement printRequirement = shouldPrintText("Hello World");
+        Requirement noRequirement = new Requirement("No Requirement");
+        Task task = new Task("Title", newHashSet(printRequirement, noRequirement));
 
         VerificationResult result = new VerificationService().verify(task, codePrinting("Some other text"));
-        Assert.assertFalse(result.isPassed());
-        Assert.assertNotNull(result.getExecutionResult());
+
+        assertFalse(result.isPassed());
+        Assert.assertTrue(result.getCompilation().getProblems().isEmpty());
+        assertEquals(result.getResults().get(printRequirement.getName()), FAILED);
+        assertEquals(result.getResults().get(noRequirement.getName()), PASSED);
     }
 
     @Test
     public void shouldRunCodeThatIsNotCompiling() throws Exception {
-        Requirement requirement = new Requirement(TASK_ID, "Should print Hello World", Arrays.asList(shouldPrintSpecification("Hello world")));
+        Requirement requirement = shouldPrintText("Hello World");
         Task task = new Task("Title", newHashSet(requirement));
 
         VerificationResult result = new VerificationService().verify(task, codeNotCompiling());
 
-        Assert.assertFalse(result.isPassed());
-        Assert.assertNotNull(result.getExecutionResult());
-        Assert.assertFalse(result.getExecutionResult().getCompilation().getProblems().isEmpty());
+        assertFalse(result.isPassed());
+        assertFalse(result.getCompilation().getProblems().isEmpty());
+        assertEquals(result.getResults().get(requirement.getName()), NOT_COMPILED);
     }
 
-    private Specification shouldPrintSpecification(String expectedOutput) {
-        return new Specification("requirementId", "", expectedOutput);
+    private Requirement shouldPrintText(String text) {
+        Specification specification = new Specification("requirementId", "", text);
+        return new Requirement("Should print text", specification);
     }
 }

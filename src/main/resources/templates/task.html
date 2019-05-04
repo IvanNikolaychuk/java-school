@@ -46,7 +46,7 @@
         </div>
         <div class="task">
             <div class="task-conditions">
-                <div th:each="requirement :  ${task.requirements}" th:text="'•  ' + ${requirement.value}" class="condition">
+                <div th:each="requirement :  ${task.requirements}" th:text="'•  ' + ${requirement.name}" class="condition">
                 </div>
             </div>
 

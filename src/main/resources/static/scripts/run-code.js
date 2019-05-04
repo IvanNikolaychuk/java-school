@@ -17,8 +17,8 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
-        if (hasCompilationErrors(response)) {
-            showCompilationErrors(response);
+        if (hasCompilationErrors(response.compilation)) {
+            showCompilationErrors(response.compilation);
         } else {
             hideCompilationErrorSection();
             $("#task-section .output-section").show();

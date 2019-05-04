@@ -19,6 +19,10 @@ public class ExecutionResult {
         return new ExecutionResult(noCompilationErrors(), programOutput);
     }
 
+    public boolean hasCompilationFailed() {
+        return !compilation.getProblems().isEmpty();
+    }
+
     public String getOutput() {
         return output;
     }
