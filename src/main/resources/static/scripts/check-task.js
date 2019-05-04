@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
-        if (response.result) {
+        if (response.passed) {
             getStatus().css("background", "#3dce2bb3");
             getStatus().text('All check passed. Great job!');
         } else if (hasCompilationErrors(response.executionResult)) {
