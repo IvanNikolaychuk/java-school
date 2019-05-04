@@ -1,6 +1,5 @@
 package com.school.domain.code.task.verification;
 
-import com.school.domain.code.task.Requirement;
 import com.school.domain.code.task.Task;
 import org.junit.Assert;
 

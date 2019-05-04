@@ -1,5 +1,7 @@
 package com.school.domain.code.task;
 
+import com.school.domain.code.task.verification.Requirement;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;

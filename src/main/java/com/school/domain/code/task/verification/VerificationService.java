@@ -3,7 +3,6 @@ package com.school.domain.code.task.verification;
 import com.school.app.CodeRunner;
 import com.school.domain.code.program.Compilation;
 import com.school.domain.code.program.ExecutionResult;
-import com.school.domain.code.task.Requirement;
 import com.school.domain.code.task.Task;
 
 import java.util.HashMap;

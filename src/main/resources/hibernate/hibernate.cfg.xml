@@ -19,7 +19,7 @@
 
         <mapping class="com.school.domain.code.task.Task"/>
         <mapping class="com.school.domain.code.task.Class"/>
-        <mapping class="com.school.domain.code.task.Requirement"/>
+        <mapping class="com.school.domain.code.task.verification.Requirement"/>
         <mapping class="com.school.domain.code.task.verification.Test"/>
 
     </session-factory>

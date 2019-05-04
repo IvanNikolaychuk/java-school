@@ -1,4 +1,4 @@
-package com.school.domain.code.task;
+package com.school.domain.code.task.verification;
 
 import com.school.domain.code.task.verification.Test;
 
