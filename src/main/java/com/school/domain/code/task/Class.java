@@ -2,7 +2,6 @@ package com.school.domain.code.task;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "classes")

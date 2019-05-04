@@ -9,27 +9,21 @@ public class Specification {
     @Id
     @GeneratedValue
     private String id;
+    private String requirementId;
 
-    private String taskId;
-    private String conditionId;
     private String programInput;
     private String expectedOutput;
 
     public Specification() {}
 
-    public Specification(String taskId, String conditionId, String programInput, String expectedOutput) {
-        this.taskId = taskId;
-        this.conditionId = conditionId;
+    public Specification(String requirementId, String programInput, String expectedOutput) {
+        this.requirementId = requirementId;
         this.programInput = programInput;
         this.expectedOutput = expectedOutput;
     }
 
-    public String getConditionId() {
-        return conditionId;
-    }
-
-    public String getTaskId() {
-        return taskId;
+    public String getRequirementId() {
+        return requirementId;
     }
 
     public String getProgramInput() {
