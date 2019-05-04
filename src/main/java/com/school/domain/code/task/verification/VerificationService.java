@@ -7,22 +7,21 @@ import com.school.domain.code.task.Requirement;
 import com.school.domain.code.task.Task;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static com.school.domain.code.task.verification.VerificationStatus.FAILED;
-import static com.school.domain.code.task.verification.VerificationStatus.NOT_COMPILED;
-import static com.school.domain.code.task.verification.VerificationStatus.PASSED;
+import static com.school.domain.code.task.verification.VerificationResult.FAILED;
+import static com.school.domain.code.task.verification.VerificationResult.NOT_COMPILED;
+import static com.school.domain.code.task.verification.VerificationResult.PASSED;
 
 public class VerificationService {
     private final CodeRunner codeRunner = new CodeRunner();
 
-    public VerificationResult verify(Task task, String code) throws Exception {
-        Map<String, VerificationStatus> verificationResults = new HashMap<>();
+    public VerificationSummary verify(Task task, String code) throws Exception {
+        Map<String, VerificationResult> verificationResults = new HashMap<>();
 
         Compilation compilationExample = Compilation.noCompilationErrors();
         for (Requirement requirement : task.getRequirements()) {
-            VerificationStatus status = PASSED;
+            VerificationResult status = PASSED;
             for (Specification specification : requirement.getSpecifications()) {
                 ExecutionResult executionResult = codeRunner.run(code, specification.getProgramInput());
                 if (executionResult.hasCompilationFailed()) {
@@ -37,7 +36,7 @@ public class VerificationService {
         }
 
         return verificationResults.values().stream().allMatch(status -> status.equals(PASSED)) ?
-                VerificationResult.ok(verificationResults) :
-                VerificationResult.failure(verificationResults, compilationExample);
+                VerificationSummary.ok(verificationResults) :
+                VerificationSummary.failure(verificationResults, compilationExample);
     }
 }

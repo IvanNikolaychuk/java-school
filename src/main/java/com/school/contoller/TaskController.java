@@ -1,7 +1,7 @@
 package com.school.contoller;
 
 import com.school.domain.code.task.TaskService;
-import com.school.domain.code.task.verification.VerificationResult;
+import com.school.domain.code.task.verification.VerificationSummary;
 import com.school.domain.code.task.verification.VerificationService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +29,8 @@ public class TaskController {
     @PostMapping("task/verify/{taskId}")
     public ResponseEntity<String> verify(@PathVariable String taskId, @RequestParam String code) {
         try {
-            VerificationResult result = verificationService.verify(taskService.get(taskId), code);
-            return new ResponseEntity<>(new JSONObject(result).toString(), OK);
+            VerificationSummary summary = verificationService.verify(taskService.get(taskId), code);
+            return new ResponseEntity<>(new JSONObject(summary).toString(), OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Ooops, something is wrong :(", INTERNAL_SERVER_ERROR);
         }

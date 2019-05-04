@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static com.school.domain.code.task.verification.VerificationStatus.*;
+import static com.school.domain.code.task.verification.VerificationResult.*;
 import static com.school.utils.CodeTemplates.codeNotCompiling;
 import static com.school.utils.CodeTemplates.codePrinting;
 import static org.junit.Assert.assertEquals;
@@ -19,7 +19,7 @@ public class VerificationServiceTest {
         Requirement requirement = shouldPrintText("Hello world");
         Task task = new Task("Title", newHashSet(requirement));
 
-        VerificationResult result = new VerificationService().verify(task, codePrinting("Hello world"));
+        VerificationSummary result = new VerificationService().verify(task, codePrinting("Hello world"));
 
         Assert.assertTrue(result.isPassed());
         Assert.assertNotNull(result.getCompilation());
@@ -33,7 +33,7 @@ public class VerificationServiceTest {
         Requirement noRequirement = new Requirement("No Requirement");
         Task task = new Task("Title", newHashSet(printRequirement, noRequirement));
 
-        VerificationResult result = new VerificationService().verify(task, codePrinting("Some other text"));
+        VerificationSummary result = new VerificationService().verify(task, codePrinting("Some other text"));
 
         assertFalse(result.isPassed());
         Assert.assertTrue(result.getCompilation().getProblems().isEmpty());
@@ -46,7 +46,7 @@ public class VerificationServiceTest {
         Requirement requirement = shouldPrintText("Hello World");
         Task task = new Task("Title", newHashSet(requirement));
 
-        VerificationResult result = new VerificationService().verify(task, codeNotCompiling());
+        VerificationSummary result = new VerificationService().verify(task, codeNotCompiling());
 
         assertFalse(result.isPassed());
         assertFalse(result.getCompilation().getProblems().isEmpty());
