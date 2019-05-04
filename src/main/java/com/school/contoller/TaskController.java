@@ -1,8 +1,8 @@
 package com.school.contoller;
 
 import com.school.domain.code.task.TaskService;
-import com.school.domain.code.task.VerificationResult;
-import com.school.domain.code.task.VerificationService;
+import com.school.domain.code.task.verification.VerificationResult;
+import com.school.domain.code.task.verification.VerificationService;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

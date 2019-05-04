@@ -1,4 +1,4 @@
-package com.school.domain.code.task;
+package com.school.domain.code.task.verification;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +16,13 @@ public class Specification {
     private String expectedOutput;
 
     public Specification() {}
+
+    public Specification(String taskId, String conditionId, String programInput, String expectedOutput) {
+        this.taskId = taskId;
+        this.conditionId = conditionId;
+        this.programInput = programInput;
+        this.expectedOutput = expectedOutput;
+    }
 
     public String getConditionId() {
         return conditionId;

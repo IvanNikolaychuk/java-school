@@ -1,5 +1,7 @@
 package com.school.domain.code.task;
 
+import com.school.domain.code.task.verification.Specification;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +24,13 @@ public class Task {
     private Set<Specification> specifications;
 
     public Task() {}
+
+    public Task(String title, List<Class> classes, List<String> conditions, Set<Specification> specifications) {
+        this.title = title;
+        this.classes = classes;
+        this.conditions = conditions;
+        this.specifications = specifications;
+    }
 
     public String getId() {
         return id;

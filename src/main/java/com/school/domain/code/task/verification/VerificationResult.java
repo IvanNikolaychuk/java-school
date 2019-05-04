@@ -1,15 +1,15 @@
-package com.school.domain.code.task;
+package com.school.domain.code.task.verification;
 
 import com.school.domain.code.program.ExecutionResult;
 
 public class VerificationResult {
-    private final boolean result;
+    private final boolean passed;
     private final ExecutionResult executionResult;
     private final String programInput;
     private final String expectedOutput;
 
-    private VerificationResult(boolean result, ExecutionResult executionResult, String programInput, String expectedOutput) {
-        this.result = result;
+    private VerificationResult(boolean passed, ExecutionResult executionResult, String programInput, String expectedOutput) {
+        this.passed = passed;
         this.executionResult = executionResult;
         this.programInput = programInput;
         this.expectedOutput = expectedOutput;
@@ -23,8 +23,8 @@ public class VerificationResult {
         return new VerificationResult(false, executionResult, programInput, expectedOutput);
     }
 
-    public boolean isResult() {
-        return result;
+    public boolean isPassed() {
+        return passed;
     }
 
     public ExecutionResult getExecutionResult() {

@@ -1,7 +1,8 @@
-package com.school.domain.code.task;
+package com.school.domain.code.task.verification;
 
 import com.school.app.CodeRunner;
 import com.school.domain.code.program.ExecutionResult;
+import com.school.domain.code.task.Task;
 
 public class VerificationService {
     private final CodeRunner codeRunner = new CodeRunner();

@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.util.Collections;
 
+import static com.school.utils.CodeTemplates.codeNotCompiling;
+import static com.school.utils.CodeTemplates.codePrinting;
+
 public class CodeRunnerTest {
     private CodeRunner codeRunner = new CodeRunner();
 
@@ -14,7 +17,7 @@ public class CodeRunnerTest {
     public void shouldRunCodeWithoutInput() throws Exception {
         String text = "Hello";
 
-        ExecutionResult result = codeRunner.run(codeWithoutScanner(text), "");
+        ExecutionResult result = codeRunner.run(codePrinting(text), "");
 
         Assert.assertEquals(result.getOutput(), text);
     }
@@ -39,26 +42,6 @@ public class CodeRunnerTest {
                         "\t\tSystem.out.print(\"Hello\")\n" +
                         "\t\t                         ^"
         ));
-    }
-
-    private String codeNotCompiling() {
-        return "package " + RandomString.generate() + ";\n" +
-                "\n" +
-                "public class Test {\n" +
-                "\tpublic static void main(String[] args) {\n" +
-                "\t\tSystem.out.print(\"Hello\")\n" +
-                "\t}\n" +
-                "}";
-    }
-
-    private String codeWithoutScanner(String text) {
-        return "package " + RandomString.generate() + ";\n" +
-                "\n" +
-                "public class Test{\n" +
-                "\tpublic static void main(String[] args) {\n" +
-                "\t\tSystem.out.print(\"" + text + "\");\n" +
-                "\t}\n" +
-                "}";
     }
 
     private String codeWithScanner(String text) {
