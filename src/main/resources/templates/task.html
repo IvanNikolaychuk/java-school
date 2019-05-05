@@ -21,7 +21,7 @@
     <script src="../../../../../external/ace/src-noconflict/ext-language_tools.js"></script>
     <script src="../../../../../scripts/ace-editor-config.js" type="text/javascript" charset="utf-8"></script>
 
-    <link rel="stylesheet" href="../../../../../css/code.css">
+    <link rel="stylesheet" href="../../../../../css/task.css">
 
 </head>
 <body>
@@ -45,8 +45,10 @@
             <div class="class-name"></div>
         </div>
         <div class="task">
-            <div class="task-conditions">
-                <div th:each="requirement :  ${task.requirements}" th:text="'•  ' + ${requirement.name}" class="condition">
+            <div class="requirements">
+                <div class="requirement" th:each="requirement :  ${task.requirements}">
+                            <div class="icon requirement-result-icon"></div>
+                            <span class="requirement-text" th:text="${requirement.name}"></span>
                 </div>
             </div>
 

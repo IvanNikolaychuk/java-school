@@ -14,6 +14,25 @@ $(document).ready(function() {
     });
 
     function handleResponse(response) {
+        changeRequirementResultIcons(response);
+        changeStatus(response);
+    }
+
+    function changeRequirementResultIcons(response) {
+        var $requirementTextDiv = $(".requirement-text");
+        for (var i = 0; i < $requirementTextDiv.length; i++) {
+            var $requirementName = $($requirementTextDiv[i]).text();
+            var $iconDiv = $($requirementTextDiv[i]).siblings(".requirement-result-icon")[0];
+            if (response.results[$requirementName] === 'PASSED') {
+                $($iconDiv).css("background-image", "url('../icons/status/passed.svg')")
+            } else {
+                $($iconDiv).css("background-image", "url('../icons/status/failed.svg')")
+            }
+            showRequirementResultIcons();
+        }
+    }
+
+    function changeStatus(response) {
         if (response.passed) {
             getStatus().css("background", "#3dce2bb3");
             getStatus().text('All check passed. Great job!');
