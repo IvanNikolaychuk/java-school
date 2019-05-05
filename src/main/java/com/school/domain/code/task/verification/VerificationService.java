@@ -22,12 +22,14 @@ public class VerificationService {
         for (Requirement requirement : task.getRequirements()) {
             VerificationResult status = PASSED;
             for (Test test : requirement.getTests()) {
-                ExecutionResult executionResult = codeRunner.run(code, test.getProgramInput());
-                if (executionResult.hasCompilationFailed()) {
-                    compilationExample = executionResult.getCompilation();
-                    status = NOT_COMPILED;
-                } else if (!executionResult.getProgramOutput().equals(test.getExpectedOutput())) {
-                    status = FAILED;
+                if (test.getType().equals(Test.Type.PROGRAM_OUTPUT)) {
+                    ExecutionResult executionResult = codeRunner.run(code, test.getProgramInput());
+                    if (executionResult.hasCompilationFailed()) {
+                        compilationExample = executionResult.getCompilation();
+                        status = NOT_COMPILED;
+                    } else if (!executionResult.getProgramOutput().equals(test.getExpectedOutput())) {
+                        status = FAILED;
+                    }
                 }
             }
 

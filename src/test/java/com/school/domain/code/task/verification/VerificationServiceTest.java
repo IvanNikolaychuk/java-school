@@ -52,7 +52,7 @@ public class VerificationServiceTest {
     }
 
     private Requirement shouldPrintText(String text) {
-        Test test = new Test("requirementId", "", text);
+        Test test = Test.aProgramOutputTest("requirementId", "", text);
         return new Requirement("Should print text", test);
     }
 }

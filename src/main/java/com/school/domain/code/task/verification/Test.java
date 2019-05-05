@@ -1,8 +1,8 @@
 package com.school.domain.code.task.verification;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import static com.school.domain.code.task.verification.Test.Type.PROGRAM_OUTPUT;
 
 @Entity(name = "test")
 public class Test {
@@ -11,15 +11,23 @@ public class Test {
     private String id;
     private String requirementId;
 
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
     private String programInput;
     private String expectedOutput;
 
     public Test() {}
 
-    public Test(String requirementId, String programInput, String expectedOutput) {
+    private Test(Type type, String requirementId, String programInput, String expectedOutput) {
+        this.type = type;
         this.requirementId = requirementId;
         this.programInput = programInput;
         this.expectedOutput = expectedOutput;
+    }
+
+    public static Test aProgramOutputTest(String requirementId, String programInput, String expectedOutput) {
+        return new Test(PROGRAM_OUTPUT, requirementId, programInput, expectedOutput);
     }
 
     public String getRequirementId() {
@@ -32,5 +40,15 @@ public class Test {
 
     public String getExpectedOutput() {
         return expectedOutput;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public enum Type {
+        PROGRAM_OUTPUT,
+        METHOD_EXISTS,
+        METHOD_EXECUTION
     }
 }
