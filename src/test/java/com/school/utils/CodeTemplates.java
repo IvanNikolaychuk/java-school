@@ -26,7 +26,7 @@ public class CodeTemplates {
                 "public class Main {\n" +
                 "    public static void main(String[] args) { }\n" +
                 "    \n" +
-                "    public int max(int a, int b) {\n" +
+                "    public static int max(int a, int b) {\n" +
                 "        return a > b ? a : b;\n" +
                 "    }\n" +
                 "}";

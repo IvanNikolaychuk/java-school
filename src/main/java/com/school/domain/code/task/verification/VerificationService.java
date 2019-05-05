@@ -26,7 +26,7 @@ public class VerificationService {
                 if (executionResult.hasCompilationFailed()) {
                     compilationExample = executionResult.getCompilation();
                     status = NOT_COMPILED;
-                } else if (!executionResult.getOutput().equals(test.getExpectedOutput())) {
+                } else if (!executionResult.getProgramOutput().equals(test.getExpectedOutput())) {
                     status = FAILED;
                 }
             }

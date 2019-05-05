@@ -1,6 +1,7 @@
 package com.school.app;
 
 import com.school.domain.code.program.ExecutionResult;
+import com.school.domain.code.program.Method;
 import com.school.utils.RandomString;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import java.util.Collections;
 
 import static com.school.utils.CodeTemplates.codeNotCompiling;
 import static com.school.utils.CodeTemplates.codePrinting;
+import static com.school.utils.CodeTemplates.codeWithMaxMethod;
+import static org.junit.Assert.assertEquals;
 
 public class CodeRunnerTest {
     private CodeRunner codeRunner = new CodeRunner();
@@ -19,7 +22,7 @@ public class CodeRunnerTest {
 
         ExecutionResult result = codeRunner.run(codePrinting(text), "");
 
-        Assert.assertEquals(result.getOutput(), text);
+        assertEquals(result.getProgramOutput(), text);
     }
 
     @Test
@@ -29,19 +32,29 @@ public class CodeRunnerTest {
 
         ExecutionResult result = codeRunner.run(codeWithScanner(text), input);
 
-        Assert.assertEquals(result.getOutput(), text + input);
+        assertEquals(result.getProgramOutput(), text + input);
     }
 
     @Test
     public void shouldRunCodeThatIsNotCompiling() throws Exception {
         ExecutionResult result = codeRunner.run(codeNotCompiling(), "");
 
-        Assert.assertEquals(result.getOutput(), "");
-        Assert.assertEquals(result.getCompilation().getProblems(), Collections.singletonList(
+        assertEquals(result.getProgramOutput(), "");
+        assertEquals(result.getCompilation().getProblems(), Collections.singletonList(
                 "Test.java:5: error: ';' expected\n" +
                         "\t\tSystem.out.print(\"Hello\")\n" +
                         "\t\t                         ^"
         ));
+    }
+
+    @Test
+    public void shouldRunCustomMethod() throws Exception {
+        Class[] parameterTypes = new Class[] {int.class, int.class};
+        Object[] args = new Object[] {1,2};
+        ExecutionResult result = codeRunner.run(codeWithMaxMethod(),
+                new Method("max", parameterTypes, args), "");
+
+        assertEquals(result.getMethodResult(), 2);
     }
 
     private String codeWithScanner(String text) {

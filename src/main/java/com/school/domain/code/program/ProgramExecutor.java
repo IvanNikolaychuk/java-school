@@ -32,9 +32,9 @@ public class ProgramExecutor {
         }
 
         inputOutputHelper.createInputOutputFiles(program);
-        javaMethodRunner.run(toValidClass(program.getPotentialClass()), method);
+        Object methodResult = javaMethodRunner.run(toValidClass(program.getPotentialClass()), method);
 
-        return withPassedCompilation(inputOutputHelper.readOutputContent(program.getEnvironment()));
+        return withPassedCompilation(inputOutputHelper.readOutputContent(program.getEnvironment()), methodResult);
     }
 
     private ValidJavaClass toValidClass(PotentialJavaClass potentialJavaClass) {

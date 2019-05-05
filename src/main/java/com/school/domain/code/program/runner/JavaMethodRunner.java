@@ -17,11 +17,12 @@ public class JavaMethodRunner {
         this.javaClassCompiler = new JavaClassCompiler();
     }
 
-    public void run(ValidJavaClass validJavaClass, Method method) throws Exception {
+    public Object run(ValidJavaClass validJavaClass, Method method) throws Exception {
         javaClassCompiler.compile(validJavaClass);
 
-        aClassLoaderFor(validJavaClass).loadClass(validJavaClass.getRelativePathWithoutExtension(SEPARATOR))
-                .getMethod(method.getName(), String[].class)
+        return aClassLoaderFor(validJavaClass)
+                .loadClass(validJavaClass.getRelativePathWithoutExtension(SEPARATOR))
+                .getMethod(method.getName(), method.getParameterTypes())
                 .invoke(null, method.getArgs());
     }
 
