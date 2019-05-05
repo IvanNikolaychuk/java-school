@@ -1,5 +1,6 @@
 package com.school.domain.code.program.runner;
 
+import com.school.domain.code.program.Method;
 import com.school.domain.code.program.compiler.JavaClassCompiler;
 import com.school.domain.code.program.javaclass.ValidJavaClass;
 
@@ -8,31 +9,24 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
 
-public class JavaMainMethodRunner {
+public class JavaMethodRunner {
     private static final String SEPARATOR = ".";
     private final JavaClassCompiler javaClassCompiler;
 
-    public JavaMainMethodRunner() {
+    public JavaMethodRunner() {
         this.javaClassCompiler = new JavaClassCompiler();
     }
 
-    public void runMainMethod(ValidJavaClass validJavaClass) throws Exception {
+    public void run(ValidJavaClass validJavaClass, Method method) throws Exception {
         javaClassCompiler.compile(validJavaClass);
 
         aClassLoaderFor(validJavaClass).loadClass(validJavaClass.getRelativePathWithoutExtension(SEPARATOR))
-                .getMethod("main", String[].class)
-                .invoke(null, emptyArgs());
+                .getMethod(method.getName(), String[].class)
+                .invoke(null, method.getArgs());
     }
 
     private URLClassLoader aClassLoaderFor(ValidJavaClass validJavaClass) throws MalformedURLException {
-        ClassLoader classLoader = JavaMainMethodRunner.class.getClassLoader();
+        ClassLoader classLoader = JavaMethodRunner.class.getClassLoader();
         return new URLClassLoader(new URL[]{Paths.get(validJavaClass.getDirectory()).toUri().toURL()}, classLoader);
-    }
-
-    private Object[] emptyArgs() {
-        final Object[] args = new Object[1];
-        args[0] = new String[0];
-
-        return args;
     }
 }

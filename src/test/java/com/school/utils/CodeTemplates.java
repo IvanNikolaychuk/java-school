@@ -20,4 +20,15 @@ public class CodeTemplates {
                 "\t}\n" +
                 "}";
     }
+
+    public static String codeWithMaxMethod() {
+        return "package " + RandomString.generate() + ";\n" +
+                "public class Main {\n" +
+                "    public static void main(String[] args) { }\n" +
+                "    \n" +
+                "    public int max(int a, int b) {\n" +
+                "        return a > b ? a : b;\n" +
+                "    }\n" +
+                "}";
+    }
 }
