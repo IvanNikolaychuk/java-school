@@ -28,7 +28,6 @@ $(document).ready(function() {
             } else {
                 $($iconDiv).css("background-image", "url('../icons/status/failed.svg')")
             }
-            showRequirementResultIcons();
         }
     }
 

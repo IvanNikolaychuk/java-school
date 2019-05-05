@@ -1,6 +1,5 @@
 $(document).ready(function() {
     hideStatus();
-    hideRequirementResultIcons();
     hideCompilationErrorSection();
 });
 
@@ -16,12 +15,4 @@ function showStatus() {
 function hideStatus() {
     $("#code-editor").css("height", "77%");
     getStatus().hide();
-}
-
-function hideRequirementResultIcons() {
-    $(".requirement-result-icon").hide();
-}
-
-function showRequirementResultIcons() {
-    $(".requirement-result-icon").show();
 }
